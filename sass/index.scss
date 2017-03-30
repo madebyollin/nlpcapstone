@@ -125,10 +125,7 @@ main {
         padding-bottom: 32px;
         font-size: 4em;
         text-align: center;
-        &::after {
-            content: "🦋";
 
-        }
         &:hover {
             animation: wiggle .25s ease infinite;
         }
@@ -166,4 +163,12 @@ main {
         line-height: 1.8;
         margin-bottom: 2em;
     }
+}
+
+.butterfly {
+    background-image: url("/images/butterfly.png");
+    width: 1em;
+    height: 1em;
+    background-size: contain;
+    display: inline-block;
 }
