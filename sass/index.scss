@@ -16,6 +16,10 @@ a {
     }
 }
 
+strong {
+    font-weight: bolder;
+}
+
 * {
     box-sizing: border-box;
     font-family: Roboto;
@@ -42,9 +46,13 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
 }
 
-p {
+p, li {
     font-weight: 300;
 
+}
+
+ul {
+    margin-bottom: 1em;
 }
 .placeholder {
     color: #bbb;
@@ -109,7 +117,6 @@ main {
             a {
                 text-decoration: none;
             }
-
         }
     }
 }
@@ -158,10 +165,18 @@ main {
     h2 {
         font-size: 2rem;
         font-weight: 100;
+        padding-bottom: 12px;
+
     }
-    p {
-        line-height: 1.8;
-        margin-bottom: 2em;
+    h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        padding: 8px 0px;
+        border-top: 1px dotted #eee;
+    }
+    p,li {
+        line-height: 1.6;
+        margin-bottom: 1em;
     }
 }
 
