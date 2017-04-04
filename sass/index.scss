@@ -178,6 +178,13 @@ main {
         line-height: 1.6;
         margin-bottom: 1em;
     }
+    p.footnote {
+        font-size: smaller;
+    }
+    .tag {
+        vertical-align: super;
+        font-size: 50%;
+    }
 }
 
 .butterfly {
