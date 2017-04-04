@@ -7,6 +7,8 @@ a {
   a:hover {
     color: #0068c1;
     border-color: #0068c1; }
+  a.tag {
+    border: 0; }
 
 strong {
   font-weight: bolder; }
@@ -136,6 +138,11 @@ main {
   .post .tag {
     vertical-align: super;
     font-size: 50%; }
+
+hr {
+  border: none;
+  border-top: 1px dotted #eee;
+  margin: 32px 0; }
 
 .butterfly {
   background-image: url("/images/butterfly.png");

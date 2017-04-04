@@ -17,6 +17,7 @@
             <li><strong>Shallow Discourse Parsing</strong></li>
         </ul>
         <p>We will work in <!--(-->start-up mode<!-- | research mode)-->.</p>
+        <p>Our project (and blog) is <a href="https://github.com/madebyollin/nlpcapstone/">here on GitHub</a>.</p>
         <!--
         List the top 3 project ideas your team is the most excited about.
         Briefly outline the minimal viable action plan with stretch goals.
@@ -62,7 +63,7 @@
             <li><strong>Integrate Sentiment Processing with TTS as Conditioning:</strong> If we can implement <a href="https://github.com/ibab/tensorflow-wavenet/issues/112">local conditioning for TF-WaveNet</a>, for example, then we can train the speech synthesis model with emotion directly.</li>
         </ul>
 
-        <h2>Shallow Discourse Parsing<span class="tag">[1]</span></h2>
+        <h2>Shallow Discourse Parsing<a class="tag" href="#f1">[1]</a></h2>
         <h3>Action Plan</h3>
         <p>Implement a multi-step parsing pipeline as outlined in <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S1351324912000307">Lin et al., 2012</a>: discourse connective classification, argument segmentation, sense classification. Each of these steps can be tackled in a number of ways. As a minimal viable action plan, we propose:
             <ul>
@@ -79,11 +80,10 @@
                 <li>Specialized argument extractors as described in <a href="http://aclweb.org/anthology/K15-2002">Wang &amp; Lan, 2015</a></li>
             </ul>
         </p>
-        <p class="footnote">
+        <hr />
+        <p class="footnote" id="f1">
             <span class="tag">1</span> Nianwen Xue, Hwee Tou Ng, Sameer Pradhan, Rashmi Prasad, Christopher Bryant, and Attapol T Rutherford. 2015. <a href="http://aclweb.org/anthology/K15-2001">The CoNLL-2015 shared task on shallow discourse parsing</a>. In <em>Proceedings of the Conference on Natural Language Learning (CoNLL)</em>.
         </p>
-
-        <p>Our project (and blog) is <a href="https://github.com/madebyollin/nlpcapstone/">here on GitHub</a>.</p>
     </div>
 </body>
 </html>
