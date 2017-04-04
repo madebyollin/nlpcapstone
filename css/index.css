@@ -131,6 +131,11 @@ main {
   .post p, .post li {
     line-height: 1.6;
     margin-bottom: 1em; }
+    .post p.footnote {
+      font-size: smaller; }
+  .post .tag {
+    vertical-align: super;
+    font-size: 50%; }
 
 .butterfly {
   background-image: url("/images/butterfly.png");

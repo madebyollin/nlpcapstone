@@ -14,7 +14,7 @@
         <ul>
             <li><strong>Question Answering with MSMarco</strong></li>
             <li><strong>Sentimental Speech Generation</strong></li>
-            <li><strong>Idea 3</strong></li>
+            <li><strong>Shallow Discourse Parsing</strong></li>
         </ul>
         <p>We will work in <!--(-->start-up mode<!-- | research mode)-->.</p>
         <!--
@@ -62,15 +62,26 @@
             <li><strong>Integrate Sentiment Processing with TTS as Conditioning:</strong> If we can implement <a href="https://github.com/ibab/tensorflow-wavenet/issues/112">local conditioning for TF-WaveNet</a>, for example, then we can train the speech synthesis model with emotion directly.</li>
         </ul>
 
-        <h2>Idea 3</h2>
+        <h2>Shallow Discourse Parsing<span class="tag">[1]</span></h2>
         <h3>Action Plan</h3>
-        <ul>
-            <li><strong>TODO</strong></li>
-        </ul>
+        <p>Implement a multi-step parsing pipeline as outlined in <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/S1351324912000307">Lin et al., 2012</a>: discourse connective classification, argument segmentation, sense classification. Each of these steps can be tackled in a number of ways. As a minimal viable action plan, we propose:
+            <ul>
+                <li><strong>Discourse Connective Classification:</strong> matching directly on strings of known connectives</li>
+                <li><strong>Argument Segmentation:</strong> token-level sequence labeling using CRFs (<a href="http://www.aclweb.org/anthology/I11-1120">Ghosh et al., 2011</a>)</li>
+                <li><strong>Sense Classification:</strong> using Brown cluster pairs and coreference patterns (<a href="http://www.anthology.aclweb.org/E/E14/E14-1068.pdf">Rutherford &amp; Xue, 2014</a>)</li>
+            </ul>
+        </p>
         <h3>Stretch Goals</h3>
-        <ul>
-            <li><strong>TODO</strong></li>
-        </ul>
+        <p>Optimized/more sophisticated models for the steps described above:
+            <ul>
+                <li>Syntactic features for connective classification (<a href="http://www.aclweb.org/anthology/P09-2004">Pitler &amp; Nenkova, 2009</a>)</li>
+                <li>Latent variable RNN for implicit sense classification (<a href="https://arxiv.org/pdf/1603.01913.pdf">Ji et al., 2016</a>)</li>
+                <li>Specialized argument extractors as described in <a href="http://aclweb.org/anthology/K15-2002">Wang &amp; Lan, 2015</a></li>
+            </ul>
+        </p>
+        <p class="footnote">
+            <span class="tag">1</span> Nianwen Xue, Hwee Tou Ng, Sameer Pradhan, Rashmi Prasad, Christopher Bryant, and Attapol T Rutherford. 2015. <a href="http://aclweb.org/anthology/K15-2001">The CoNLL-2015 shared task on shallow discourse parsing</a>. In <em>Proceedings of the Conference on Natural Language Learning (CoNLL)</em>.
+        </p>
 
         <p>Our project (and blog) is <a href="https://github.com/madebyollin/nlpcapstone/">here on GitHub</a>.</p>
     </div>
