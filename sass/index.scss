@@ -113,9 +113,14 @@ main {
             overflow-y: scroll;
             padding-left: 3rem;
             position: relative;
+            line-height: 2em;
+            &:first-child h2 {
+                border-top: none;
+            }
             h2 {
                 font-size: 2rem;
                 font-weight: 100;
+                border-top: 1px dotted #eee;
             }
             a {
                 text-decoration: none;

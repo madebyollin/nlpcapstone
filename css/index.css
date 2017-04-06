@@ -85,10 +85,14 @@ main {
       font-weight: 100;
       overflow-y: scroll;
       padding-left: 3rem;
-      position: relative; }
+      position: relative;
+      line-height: 2em; }
+      main #posts li:first-child h2 {
+        border-top: none; }
       main #posts li h2 {
         font-size: 2rem;
-        font-weight: 100; }
+        font-weight: 100;
+        border-top: 1px dotted #eee; }
       main #posts li a {
         text-decoration: none; }
 
