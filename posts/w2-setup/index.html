@@ -17,25 +17,32 @@
         -->
         <ul>
             <li>
-            <em>Brandon:</em> I installed TensorFlow and
-            spaCy. (spaCy is a nice NLP library that we probably
-            won't use in our actual project. It's just a shortcut to help get
-            started because spaCy makes it super convenient to tokenize sentences into
-            lexemes and retrieve vector embeddings for each lexeme.)
+            <em>Brandon:</em> I installed TensorFlow and spaCy. spaCy is a nice
+            NLP library that makes it super convenient to tokenize sentences
+            into lexemes and retrieve GloVe vector embeddings for each lexeme.
+            We probably won't use spaCy in our actual project, though. <br>
 
-            I looked at an example codebase from Google research that uses a Tensorflow
-            RNN as a language model on the Penn Treebank dataset. I made
-            something similar: a silly RNN that tries to predict the next word
-            given 9 words of history. The Penn Treebank model is kind of
-            outdated, so I used some more modern Tensorflow
-            features, like <tt>dynamic_rnn</tt>.
+            I looked at an example codebase from Google research that uses a
+            Tensorflow RNN as a language model on the Penn Treebank dataset. I
+            made something similar: a silly RNN that tries to predict the next
+            word given 9 words of history. The Penn Treebank codebase is kind of
+            outdated, so I used some more modern Tensorflow features, like
+            <i>dynamic_rnn</i>. This code is available in our repo in the code
+            directory. <br>
 
+            Compared to using SciPy, making a neural net in Tensorflow was
+            pleasantly high-level and free of crazy gradient calculations.
+            Compared to using Keras, it was painstakingly verbose and devoid of
+            useful abstractions.  To achieve efficiency and more rapid
+            exploration of model architecture, especially given our short
+            timeframe, I would definitely consider using Keras for our project.
+            <br>
+            
             It was frustrating to get the model working because I ran out of
-            disk quota while installing spaCy's embeddings. Also, training this
-            basic RNN is excrutiatingly slow on a machine without GPUs. We will
-            definitely need access to GPUs in order to accomplish any deep
-            learning projects.
-            </li>
+            disk quota while installing spaCy's 1GB of word embeddings. Also,
+            training this basic RNN is excrutiatingly slow on a machine without
+            GPUs. We will definitely need access to GPUs in order to accomplish
+            any non-trivial deep learning projects.  </li>
         </ul>
     </div>
 </body>
