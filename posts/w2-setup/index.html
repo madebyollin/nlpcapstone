@@ -14,10 +14,10 @@
         </p>
         <h2>TensorFlow</h2>
         <p>We've installed <a href="https://www.tensorflow.org/install/install_linux">the GPU version of TensorFlow</a> on Attu.</p>
-        <p>We've also written <a href="https://github.com/madebyollin/nlpcapstone/blob/master/code/rnnembed.py">a (simple) LSTM language model</a> to test that our configuration is correct, and to familiarize ourselves with the basics of the API.</p>
-        <p>It was frustrating to get the model working because we ran out of disk quota on Attu while installing spaCy's embeddings. Also, training this basic RNN is excrutiatingly slow on a machine without GPUs. We will definitely need to use GPUs in order to successfully train and tune more complex models.</p>
+        <p>We've also written <a href="https://github.com/madebyollin/nlpcapstone/blob/master/code/rnnembed.py">a (simple) LSTM language model</a> to test that our configuration is correct, and to familiarize ourselves with the basics of the API.  It tries to predict the next word given the previous 9 words of history.</p>
+        <p>It was frustrating to get the model working because we ran out of disk quota on Attu while installing spaCy's 1GB of word embeddings. Also, training this basic RNN is excruciatingly slow on a machine without GPUs. We will definitely need to use GPUs in order to successfully train and tune more complex models.</p>
         <h2>spaCy</h2>
-        <p>spaCy is a nice NLP library that we probably won't use in our actual project (it's used in the demo script above). spaCy makes it convenient to tokenize sentences into lexemes and retrieve vector embeddings for each lexeme, which was useful for the LSTM language model posted above.</p>
+        <p>spaCy is a nice NLP library that makes it super convenient to tokenize sentences into lexemes and retrieve GloVe vector embeddings for each lexeme. spaCy makes it convenient to tokenize sentences into lexemes and retrieve vector embeddings for each lexeme, which was useful for the LSTM language model posted above.</p>
         <h2>Keras</h2>
         <p>For easier development of simple models, we've also set up <a href="https://keras.io/">Keras</a>, a high-level python framework which runs atop TensorFlow (or Theano) and provides a simple functional interface for creating networks.</p>
         <p>Keras appears to be more user-friendly and quick-to-write than TensorFlow (although both are comparatively high-level frameworks).</p>
