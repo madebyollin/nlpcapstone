@@ -10,10 +10,19 @@
     <div class="post">
         <a class="header" href="/"><span class="butterfly"></span></a>
         <h1>Tool Setup</h1>
-        <p>We plan to work on <span class="placeholder">topic</span>.  To do this, some technologies we will need to get running include:</p>
-        <ul>
-            <li><strong>Neural Network Libraries</strong></li>
-        </ul>
+        <p>The following is a list of some of the tools we've set up to be used for this capstone project:
+        </p>
+        <h2>TensorFlow</h2>
+        <p>We've installed <a href="https://www.tensorflow.org/install/install_linux">the GPU version of TensorFlow</a> on Attu.</p>
+        <p>We've also written <a href="https://github.com/madebyollin/nlpcapstone/blob/master/code/rnnembed.py">a (simple) LSTM language model</a> to test that our configuration is correct, and to familiarize ourselves with the basics of the API.</p>
+        <!-- more thoughts on TF here? -->
+        <h2>Keras</h2>
+        <p>For easier development of simple models, we've also set up <a href="https://keras.io/">Keras</a>, a high-level python framework which runs atop TensorFlow (or Theano) and provides a simple functional interface for creating networks.</p>
+        <p>Keras appears to be more user-friendly and quick-to-write than TensorFlow (although both are comparatively high-level frameworks).</p>
+        <h2>GCE</h2>
+        <p>We've received approval for (Google's default GPU cap is 0) and set up <a href="https://cloud.google.com/gpu/">a single-GPU instance</a> on Google Compute Engine to support  model development and training.</p>
+        <h2>Misc</h2>
+        <p>We learned how to use the "say" command for simple text-to-speech on macOS, which can be used until we get a more exciting text-to-speech engine working.</p>
     </div>
 </body>
 </html>
