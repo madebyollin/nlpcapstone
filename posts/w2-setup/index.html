@@ -9,10 +9,33 @@
 <body>
     <div class="post">
         <a class="header" href="/"><span class="butterfly"></span></a>
-        <h1>Tool Setup</h1>
-        <p>We plan to work on <span class="placeholder">topic</span>.  To do this, some technologies we will need to get running include:</p>
+        <h1>Tool Setup Experience</h1>
+        <!-- <p>We plan to work on <span class="placeholder">topic</span>.  To do this, some technologies we will need to get running include:</p>
         <ul>
             <li><strong>Neural Network Libraries</strong></li>
+        </ul>
+        -->
+        <ul>
+            <li>
+            <em>Brandon:</em> I installed TensorFlow and
+            spaCy. (spaCy is a nice NLP library that we probably
+            won't use in our actual project. It's just a shortcut to help get
+            started because spaCy makes it super convenient to tokenize sentences into
+            lexemes and retrieve vector embeddings for each lexeme.)
+
+            I looked at an example codebase from Google research that uses a Tensorflow
+            RNN as a language model on the Penn Treebank dataset. I made
+            something similar: a silly RNN that tries to predict the next word
+            given 9 words of history. The Penn Treebank model is kind of
+            outdated, so I used some more modern Tensorflow
+            features, like <tt>dynamic_rnn</tt>.
+
+            It was frustrating to get the model working because I ran out of
+            disk quota while installing spaCy's embeddings. Also, training this
+            basic RNN is excrutiatingly slow on a machine without GPUs. We will
+            definitely need access to GPUs in order to accomplish any deep
+            learning projects.
+            </li>
         </ul>
     </div>
 </body>
