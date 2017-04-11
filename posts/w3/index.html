@@ -25,7 +25,7 @@
         <h3 id="datacollection">Collecting Emotion-Tagged Data:</h3>
         <ul class="checklist">
             <li><strong>Twitter Emotion Scraper:</strong>
-            Pull a selection of English tweets from <a href="https://dev.twitter.com/index">Twitter</a>, normalize
+            Pull a selection of English tweets from <a href="https://dev.twitter.com/index">Twitter</a> (perhaps using <a href="https://github.com/nltk/nltk/wiki/Twitter-Processing">NLTK</a>, normalize
             characters, filter for sentiment-corresponding emoji (e.g. <code>anger: {😡, 😤, 😠, 👎}</code>)
             and tag appropriately (with the emoji removed).</li>
             <li class="stretch"><strong>Audio Emotion Scraper:</strong> If we
@@ -55,6 +55,7 @@
         </ul>
         <h2>Literature Survey</h2>
         <ul>
+            <li><strong>Tweet Normalization</strong>: <a href="https://noisy-text.github.io/2015/pdf/WNUT11.pdf">IHS_RD: Lexical Normalization for English Tweets</a></li>
             <li><strong>Emoji-based Sentiment Classification</strong>:
             <a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A927073&dswid=-571">
                 Multi-class Sentiment Classification on Twitter using an Emoji Training Heuristic</a>,
