@@ -91,20 +91,23 @@ ul {
         li::before {
             content: "";
             display: block;
-            width: 1em;
-            height:1em;
+            width: 1rem;
+            height:1rem;
             border: 1px solid $lgreydk;
             background: $lgrey;
             border-radius: $radius;
             position: absolute;
-            left: -2em;
-            top:.2em;
+            left: -2rem;
+            top:.2rem;
 
             vertical-align: middle;
         }
         li.checked::before {
-            content: "";
-            border: $bluedk;
+            content: "✓";
+            font-size: .8em;
+            text-align: center;
+            color: white;
+            border-color: $bluedk;
             background: $blue;
         }
         li.stretch {
