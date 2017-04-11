@@ -23,8 +23,16 @@
         <h2>Intended Methodologies</h2>
         <h3 id="datacollection">Collecting Sentiment-Tagged Data:</h3>
         <ul class="checklist">
-            <li><strong>Twitter Sentiment Scraper:</strong> Pull a selection of English tweets from Twitter, normalize characters, filter for sentiment-corresponding emoji (e.g. <code>anger: {😡, 😤, 😠, 👎}</code>) and tag appropriately (with the emoji removed).</li>
-            <li class="stretch"><strong>Audio Sentiment Scraper:</strong> If we have a sufficiently good classifier, we can extract audio snippets from Films/TV shows using subtitles, tag them using our existing classifier, and then use the most data which the classifier is most certain about to train more advanced speech generation systems.</li>
+            <li><strong>Twitter Sentiment Scraper:</strong>
+            Pull a selection of English tweets from Twitter, normalize
+            characters, filter for sentiment-corresponding emoji (e.g. <code>anger: {😡, 😤, 😠, 👎}</code>)
+            and tag appropriately (with the emoji removed).</li>
+            <li class="stretch"><strong>Audio Sentiment Scraper:</strong> If we
+            have a sufficiently good classifier, we can extract audio snippets from
+            Films/TV shows using subtitles, tag them using our existing classifier, and
+            then use the most data which the classifier is most certain about to train more
+            advanced speech generation systems.
+            </li>
         </ul>
         <h3 id="mcsc">Creating a Multi-class Sentiment Classifier</h3>
         <!-- <p>Our main implementation will be a <a href="https://github.com/fchollet/keras/blob/master/examples/imdb_bidirectional_lstm.py">Bidirectional LSTM</a> trained on Twitter data with custom embeddings.</p> -->
@@ -47,10 +55,17 @@
         <h2>Literature Survey</h2>
         <ul>
             <li><strong>Emoji-based Sentiment Classification</strong>:
-            <a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A927073&dswid=-571">Multi-class Sentiment Classification on Twitter using an Emoji Training Heuristic</a>,
-            <a href="http://k8si.github.io/2016/01/28/lstm-networks-for-sentiment-analysis-on-tweets.html">SentiLSTM Networks for Sentiment Analysis on Tweets</a>
+            <a href="http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A927073&dswid=-571">
+                Multi-class Sentiment Classification on Twitter using an Emoji Training Heuristic</a>,
+            <a href="http://k8si.github.io/2016/01/28/lstm-networks-for-sentiment-analysis-on-tweets.html">
+                LSTM Networks for Sentiment Analysis on Tweets</a>,
+            <a href="http://cs229.stanford.edu/proj2015/327_report.pdf">
+                Multiclass Emotion Analysis of Social Media Posts</a>
             </li>
-            <li><strong>Neural Text to Speech</strong>: <a href="https://arxiv.org/pdf/1703.10135.pdf">TacoTron</a>, <a href="https://arxiv.org/abs/1609.03499">WaveNet</a>, and <a href="https://arxiv.org/pdf/1702.07825.pdf">Deep Voice</a> are all sources of inspiration.</li>
+            <li><strong>Neural Text to Speech</strong>:
+            <a href="https://arxiv.org/pdf/1703.10135.pdf">TacoTron</a>,
+            <a href="https://arxiv.org/abs/1609.03499">WaveNet</a>,
+            and <a href="https://arxiv.org/pdf/1702.07825.pdf">Deep Voice</a> are all sources of inspiration.</li>
         </ul>
     </div>
 </body>
