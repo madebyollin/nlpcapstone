@@ -7,8 +7,12 @@ a {
   a:hover {
     color: #0068c1;
     border-color: #0068c1; }
-  a.tag {
-    border: 0; }
+  a[href^="#"] {
+    font-weight: bolder;
+    color: black;
+    border-color: transparent; }
+    a[href^="#"]:hover {
+      color: #285882; }
 
 strong {
   font-weight: bolder; }
@@ -39,6 +43,46 @@ p, li {
 
 ul {
   margin-bottom: 1em; }
+  ul.checklist li {
+    list-style-type: none;
+    margin-left: 1.5em;
+    position: relative; }
+  ul.checklist li::before {
+    content: "";
+    display: block;
+    width: 1em;
+    height: 1em;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    border-radius: 4px;
+    position: absolute;
+    left: -2em;
+    top: .2em;
+    vertical-align: middle; }
+  ul.checklist li.checked::before {
+    content: "";
+    border: #0068c1;
+    background: #3ba3fc; }
+  ul.checklist li.stretch {
+    color: #8238af; }
+    ul.checklist li.stretch::before {
+      background: #f4e1ff;
+      border-color: #e6c2fb; }
+    ul.checklist li.stretch::after {
+      content: "(Stretch Goal)";
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translateX(100%);
+      background: #8a53ab;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: .8em;
+      opacity: 0;
+      transition: .2s ease opacity; }
+    ul.checklist li.stretch:hover::after {
+      opacity: 1; }
 
 .placeholder {
   color: #bbb;
@@ -120,18 +164,19 @@ main {
   75% {
     transform: rotate(-5deg); } }
   .post h1 {
-    border-top: 1px dotted #eee;
-    padding-top: 16px;
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 16px;
     font-weight: 100;
     font-size: 3rem;
-    text-decoration: none; }
+    text-decoration: none;
+    text-align: center; }
   .post h2 {
     font-size: 2rem;
-    font-weight: 100;
+    font-weight: 300;
     padding-bottom: 12px; }
   .post h3 {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.4rem;
+    font-weight: 300;
     padding: 8px 0px;
     border-top: 1px dotted #eee; }
   .post p, .post li {

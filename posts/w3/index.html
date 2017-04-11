@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 3 : Project Proposal</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" href="/images/butterfly.png">
+</head>
+<body>
+    <div class="post">
+        <!-- A good proposal should sketch out both the minimal viable action plan as well as stretch goals. Clearly state your project objectives, proposed methodologies, available resources, and the evaluation plan. Don't forget to include literature survey!-->
+        <a class="header" href="/"><span class="butterfly"></span></a>
+        <h1>Project Proposal</h1>
+        <p>We propose building a <strong>sentiment-aware</strong> text-to-speech system.</p>
+        <p>This means accomplishing the following three core objectives:</p>
+        <ul>
+            <li><a href="#datacollection">Collecting Sentiment-Tagged Data from Twitter</a>
+            </li>
+            <li><a href="#mcsc">Creating a Multi-Class Sentiment Classifier</a>
+            </li>
+            <li><a href="#sctts">Creating a Sentiment-Conditional Text-to-Speech System</a></li>
+        </ul>
+        <h2>Intended Methodologies</h2>
+        <h3 id="datacollection">Data Collection:</h3>
+        <ul class="checklist">
+            <li><strong>Twitter Sentiment Scraper:</strong> Pull a selection of English tweets from Twitter, normalize characters, filter for sentiment-corresponding emoji (e.g. <code>anger: {😡, 😤, 😠, 👎}</code>) and tag appropriately (with the emoji removed).</li>
+        </ul>
+        <h3 id="mcsc">Creating a Multi-class Sentiment Classifier</h3>
+        <!-- <p>Our main implementation will be a <a href="https://github.com/fchollet/keras/blob/master/examples/imdb_bidirectional_lstm.py">Bidirectional LSTM</a> trained on Twitter data with custom embeddings.</p> -->
+        <ul class="checklist">
+            <li><strong>Baseline Classifier:</strong> A simple unigram bag-of-words model.</li>
+            <li><strong>LSTM Classifier:</strong> A <a href="https://github.com/fchollet/keras/blob/master/examples/imdb_bidirectional_lstm.py">Bidirectional LSTM</a> with custom embeddings.</li>
+            <li class="stretch"><strong>Better LSTM Classifier:</strong> Improvements to our classifier.</li>
+        </ul>
+        <h3 id="sctts">Creating a Sentiment-Conditional Text-to-Speech System</h3>
+        <ul class="checklist">
+            <li><strong>Hard-Coded Pitch Envelopes</strong>: Dead simple, hard-coded pitch envelope application system using <a href="https://pypi.python.org/pypi/aupyom/0.1.0">aupyom</a> and/or <a href="https://github.com/librosa/librosa">librosa</a>, based on <a href="https://en.wikipedia.org/wiki/Emotional_prosody">known features</a>.</li>
+            <li class="stretch"><strong>Conditional TTS</strong>: Addition of local conditioning (on words) as well as sentiment conditioning to <a href="https://github.com/ibab/tensorflow-wavenet">TF-WaveNet</a></li>
+        </ul>
+        <h2>Available Resources</h2>
+        <p><span class="placeholder">Resources</span></p>
+        <h2>Evaluation Plan</h2>
+        <p><span class="placeholder">Evaluation Plan</span></p>
+        <h2>Literature Survey</h2>
+        <p><span class="placeholder">Literature Survey</span></p>
+    </div>
+</body>
+</html>
