@@ -11,23 +11,24 @@
         <!-- A good proposal should sketch out both the minimal viable action plan as well as stretch goals. Clearly state your project objectives, proposed methodologies, available resources, and the evaluation plan. Don't forget to include literature survey!-->
         <a class="header" href="/"><span class="butterfly"></span></a>
         <h1>Project Proposal</h1>
-        <p>We propose building a <strong>sentiment-aware</strong> text-to-speech system.</p>
+        <p>We propose building a <strong>emotion-aware</strong> text-to-speech system.</p>
         <p>This means accomplishing the following three core objectives:</p>
         <ul>
             <li><a href="#datacollection">Collecting Sentiment-Tagged Data</a>
             </li>
             <li><a href="#mcsc">Creating a Multi-Class Sentiment Classifier</a>
             </li>
-            <li><a href="#sctts">Creating a Sentiment-Conditional Text-to-Speech System</a></li>
+            <li><a href="#sctts">Creating an Emotion-Conditional Text-to-Speech System</a></li>
         </ul>
+        <p>Additional resources we intend to use are <a id="linked">linked</a> in the text below.</p>
         <h2>Intended Methodologies</h2>
-        <h3 id="datacollection">Collecting Sentiment-Tagged Data:</h3>
+        <h3 id="datacollection">Collecting Emotion-Tagged Data:</h3>
         <ul class="checklist">
-            <li><strong>Twitter Sentiment Scraper:</strong>
-            Pull a selection of English tweets from Twitter, normalize
+            <li><strong>Twitter Emotion Scraper:</strong>
+            Pull a selection of English tweets from <a href="https://dev.twitter.com/index">Twitter</a>, normalize
             characters, filter for sentiment-corresponding emoji (e.g. <code>anger: {😡, 😤, 😠, 👎}</code>)
             and tag appropriately (with the emoji removed).</li>
-            <li class="stretch"><strong>Audio Sentiment Scraper:</strong> If we
+            <li class="stretch"><strong>Audio Emotion Scraper:</strong> If we
             have a sufficiently good classifier, we can extract audio snippets from
             Films/TV shows using subtitles, tag them using our existing classifier, and
             then use the most data which the classifier is most certain about to train more
@@ -39,18 +40,18 @@
         <ul class="checklist">
             <li><strong>Baseline Classifier:</strong> A simple unigram bag-of-words model.</li>
             <li><strong>LSTM Classifier:</strong> A <a href="https://github.com/fchollet/keras/blob/master/examples/imdb_bidirectional_lstm.py">Bidirectional LSTM</a> with custom embeddings.</li>
-            <li class="stretch"><strong>Better LSTM Classifier:</strong> Improvements to our classifier.</li>
+            <li class="stretch"><strong>Better LSTM Classifier:</strong> Improvements to our classifier architecture based on experimentation &amp; further research.</li>
         </ul>
-        <h3 id="sctts">Creating a Sentiment-Conditional Text-to-Speech System</h3>
+        <h3 id="sctts">Creating a Emotion-Conditional Text-to-Speech System</h3>
         <ul class="checklist">
             <li><strong>Hard-Coded Pitch Envelopes</strong>: Dead simple, hard-coded pitch envelope application system using <a href="https://pypi.python.org/pypi/aupyom/0.1.0">aupyom</a> and/or <a href="https://github.com/librosa/librosa">librosa</a>, based on <a href="https://en.wikipedia.org/wiki/Emotional_prosody">known features</a> of our emotional classes.</li>
-            <li class="stretch"><strong>Conditional TTS</strong>: Addition of local conditioning (on words) as well as sentiment conditioning to <a href="https://github.com/ibab/tensorflow-wavenet">TF-WaveNet</a></li>
+            <li class="stretch"><strong>Conditional TTS</strong>: Addition of local conditioning (on words) as well as emotion conditioning to <a href="https://github.com/ibab/tensorflow-wavenet">TF-WaveNet</a></li>
         </ul>
         <h2>Evaluation Plan</h2>
         <ul class="checklist">
             <li><strong>Sentiment Classifier Evaluation</strong>: We can batch our classes into positive/negative and test against a standard dataset (like the <a href="http://ai.stanford.edu/~amaas/data/sentiment/">IMDB movie reviews dataset</a>).</li>
-            <li><strong>Full System Evaluation</strong>: We will set up a demo page (either running locally or on a webserver) for testing.</li>
             <li><strong>TTS Mean Opinion Score</strong>: We can compare the <a href="https://en.wikipedia.org/wiki/Mean_opinion_score">MOS</a> between unconditional and sentiment-conditional renditions of text, surveyed from MTurk (or possibly from classmates).</li>
+            <li><strong>Full System Evaluation</strong>: We will set up a demo page (either running locally or on a webserver) for testing &amp; demonstration.</li>
         </ul>
         <h2>Literature Survey</h2>
         <ul>
