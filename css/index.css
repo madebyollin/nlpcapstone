@@ -214,4 +214,5 @@ hr {
   background-size: contain;
   display: inline-block; }
 
-/*# sourceMappingURL=index.css.map */
+div.katex-math {
+  text-align: center; }

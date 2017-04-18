@@ -5,6 +5,15 @@
     <title>Week 4 : Strawman I</title>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="icon" href="/images/butterfly.png">
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css"
+          integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0"
+          crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"
+            integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1"
+            crossorigin="anonymous">
+    </script>
 </head>
 <body>
     <div class="post">
@@ -30,8 +39,36 @@
         <span class="placeholder">example</span>
 
         <h2>Multi-Class Classification</h2>
-        <p>As a baseline, we use a simple unigram model <span class="placeholder">further elaboration</span>.</p>
-        <p>It achieves <span class="placeholder">metrics</span>.</p>
+        <span class="placeholder">Work-in-progress</span>
+        <p>As a baseline, we use a dirt-simple unigram classifier. It classifies
+        tweets by treating each tweet as a bag of words. Here's how it works:</p>
+        <ul>
+            <li>
+                We pick a fixed label set (a set of emotions): <span class="katex-math">\mathcal{V}</span>
+            </li>
+            <li>
+                We pick a fixed vocabulary, <span class="katex-math">\mathcal{V}</span>
+                by counting all tokens in the training data and choosing only the words
+                that occur at least <span class="katex-math">k</span> times.
+                (For our baseline, we've arbitrarily chosen <span class="katex-math">k=5</span>.)
+            </li>
+            <li>
+                We make predictions using the function
+                <div class="katex-math">F(x) = \text{softmax}(xW + b)</div>
+                The model's parameters to be learned are just a weights matrix and
+                a bias vector:
+                <ul>
+                    <li>
+                        <span class="katex-math">W \in \mathcal{R}^{|\mathcal{V}|\times|\mathcal{L}|}</span>
+                    </li>
+                    <li>
+                        <span class="katex-math"> b \in \mathcal{R}^{|\mathcal{L}|}</span>
+                    </li>
+                </ul>
+                We learned these by gradient descent on the cross-entropy loss function.
+            </li>
+        </ul>
+        <p>This baseline classifier achieves <span class="placeholder">metrics</span>.</p>
         <p>Some examples of correct classifications:</p>
 
         <p>Some examples of incorrect classifications:</p>
@@ -51,5 +88,6 @@
     </div>
 
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script src="/js/applykatex.js"></script>
 </body>
 </html>
