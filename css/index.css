@@ -193,6 +193,8 @@ main {
     font-weight: 300;
     padding: 8px 0px;
     border-top: 1px dotted #eee; }
+  .post audio {
+    margin: 1em 0; }
   .post p, .post li {
     line-height: 1.6;
     margin-bottom: 1em; }
@@ -201,6 +203,21 @@ main {
   .post .tag {
     vertical-align: super;
     font-size: 50%; }
+  .post table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 512px;
+    margin: 16px auto; }
+    .post table th {
+      font-weight: 400;
+      padding: 8px;
+      background: #f9f9f9;
+      border: 1px solid #ddd; }
+    .post table td {
+      text-align: center;
+      font-weight: 300;
+      padding: 8px;
+      border: 1px solid #ddd; }
 
 hr {
   border: none;
@@ -219,7 +236,6 @@ hr {
 
 div.katex-math {
   text-align: center;
-  padding-top: 16px;
-  padding-bottom: 16px; }
+  margin: 1em 0; }
 
 /*# sourceMappingURL=index.css.map */

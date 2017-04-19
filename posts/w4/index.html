@@ -58,7 +58,6 @@
         <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I sure hope the devil likes a pretty face, because that attitude of yours is sending you straight to hell. 🙂</p>&mdash; Kaylee (@k_greenroydd) <a href="https://twitter.com/k_greenroydd/status/853747338585804800">April 16, 2017</a></blockquote>
 
         <h2>Multi-Class Classification</h2>
-        <span class="placeholder">Work-in-progress</span>
         <p>As a baseline, we use a dirt-simple unigram classifier that we implemented
         in TensorFlow. It classifies tweets by treating each tweet as a bag of words.
         Here's how it works:</p>
@@ -100,7 +99,9 @@
         <p>Here are some performance metrics of the baseline model using 900 training tweets
         and 100 test tweets:</p>
         <table>
-            <thead>Training data</thead>
+            <tr>
+                <th colspan="2">Training Data</th>
+            </tr>
             <tr>
                 <td>Mfc</td>
                 <td>49.8%</td>
@@ -111,7 +112,9 @@
             </tr>
         </table>
         <table>
-            <thead>Test data</thead>
+            <tr>
+                <th colspan="2">Testing Data</th>
+            </tr>
             <tr>
                 <td>Mfc</td>
                 <td>48.0%</td>
@@ -165,17 +168,17 @@
         </ul>
 
         <h2>Text to Speech</h2>
-        <p>For our baseline text-to-speech model, we use the macOS <code>say</code> command and simple pitch envelopes.</p>
-        <p>Our envelope for "happy" emotions is:</p>
-        <span class="placeholder">Envelope 1</span>
-        <p>Our envelope for "sad" emotions is:</p>
-        <span class="placeholder">Envelope 2</span>
+        <p>For our baseline text-to-speech model, we use the macOS <code>say</code> command and simple, linearly-interpolated pitch envelopes (distortions over time).</p>
+        <p>Our envelope for the "happy" emotion is:</p>
+        <img src="happy.png" />
+        <p>Our envelope for the "angry" emotion is:</p>
+        <img src="angry.png" />
         <p>Some example text-to-speech outputs (from the tweets above) are:</p>
-        <h3>Happiness</h3>
+        <h4>Happiness</h4>
         <audio controls>
             <source src="happy.mp3" />
         </audio>
-        <h3>Anger</h3>
+        <h4>Anger</h4>
         <audio controls>
             <source src="angry.mp3" />
         </audio>
