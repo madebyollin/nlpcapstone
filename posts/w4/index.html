@@ -59,38 +59,110 @@
 
         <h2>Multi-Class Classification</h2>
         <span class="placeholder">Work-in-progress</span>
-        <p>As a baseline, we use a dirt-simple unigram classifier. It classifies
-        tweets by treating each tweet as a bag of words. Here's how it works:</p>
+        <p>As a baseline, we use a dirt-simple unigram classifier that we implemented
+        in TensorFlow. It classifies tweets by treating each tweet as a bag of words.
+        Here's how it works:</p>
         <ul>
             <li>
-                We pick a fixed label set (a set of emotions): <span class="katex-math">\mathcal{V}</span>
+                We pick a fixed label set (a set of emotions): <span class="katex-math">\mathcal{Y}</span>.
+                For this baseline, <span class="katex-math">\mathcal{Y}=\{\texttt{JOY}, \texttt{ANGER}\}</span>.
             </li>
             <li>
                 We pick a fixed vocabulary, <span class="katex-math">\mathcal{V}</span>
-                by counting all tokens in the training data and choosing only the words
+                by counting all tokens in the training data and choosing only the tokens
                 that occur at least <span class="katex-math">k</span> times.
-                (For our baseline, we've arbitrarily chosen <span class="katex-math">k=5</span>.)
+                For our baseline, we've arbitrarily chosen the cutoff <span class="katex-math">k=5</span>.
+                We also assign each token a unique index
+                <span class="katex-math">i \in \{0 \ldots |\mathcal{V}|-1\}</span>.
             </li>
             <li>
-                We make predictions using the function
-                <div class="katex-math">F(x) = \text{softmax}(xW + b)</div>
-                The model's parameters to be learned are just a weights matrix and
+                To feed sentences to the model, we first encode each sentence as a vector
+                <span class="katex-math">x \in \mathcal{R}^{|\mathcal{V}|}</span>
+                such that
+                <span class="katex-math">x_i</span> is set to the count of token
+                <span class="katex-math">i</span> in the sentence.
+            </li>
+            <li>
+                We predict a label <span class="katex-math">\hat{y}</span> using the function
+                <div class="katex-math"> F(x) = \text{softmax}(xW + b) </div>
+                <div class="katex-math"> \hat{y}(x) = \text{argmax\ }F(x) </div>
+            </li>
+            <li>
+                So, the model's parameters to be learned are just a weights matrix and
                 a bias vector:
-                <ul>
-                    <li>
-                        <span class="katex-math">W \in \mathcal{R}^{|\mathcal{V}|\times|\mathcal{L}|}</span>
-                    </li>
-                    <li>
-                        <span class="katex-math"> b \in \mathcal{R}^{|\mathcal{L}|}</span>
-                    </li>
-                </ul>
-                We learned these by gradient descent on the cross-entropy loss function.
+                <div class="katex-math">
+                    W \in \mathcal{R}^{|\mathcal{V}|\times|\mathcal{Y}|},\quad
+                    b \in \mathcal{R}^{|\mathcal{Y}|}
+                </div>
+                We learn these by gradient descent on the cross-entropy loss function.
             </li>
         </ul>
-        <p>This baseline classifier achieves <span class="placeholder">metrics</span>.</p>
-        <p>Some examples of correct classifications:</p>
-
-        <p>Some examples of incorrect classifications:</p>
+        <p>Here are some performance metrics of the baseline model using 900 training tweets
+        and 100 test tweets:</p>
+        <table>
+            <thead>Training data</thead>
+            <tr>
+                <td>Mfc</td>
+                <td>49.8%</td>
+            </tr>
+            <tr>
+                <td>Accuracy</td>
+                <td>94.0%</td>
+            </tr>
+        </table>
+        <table>
+            <thead>Test data</thead>
+            <tr>
+                <td>Mfc</td>
+                <td>48.0%</td>
+            </tr>
+            <tr>
+                <td>Accuracy</td>
+                <td>63.0%</td>
+            </tr>
+        </table>
+        <p>Some examples of correct test classifications:</p>
+        <ul>
+            <li>
+            <blockquote>
+                @ AuntiePegg Love this film ! Makes me laugh every time 
+            </blockquote>
+            <samp>JOY</samp>
+            </li>
+            <li>
+                <blockquote>
+                    When you 're trying to watch a movie but people wo n't stop talking . 
+                </blockquote>
+                <samp>ANGER</samp>
+            </li>
+            <li>
+                <blockquote>
+                    People using Facebook to video themselves committing murders ? What the hell ... . 
+                </blockquote>
+                <samp>ANGER</samp>
+            </li>
+            <li>
+                <blockquote>
+                    What is wrong with these crazy fucking bastards in the world
+                </blockquote>
+                <samp>ANGER</samp>
+            </li>
+        </ul>
+        <p>Some examples of incorrect test classifications:</p>
+        <ul>
+            <li>
+                <blockquote>
+                    @ Bryan_L_Johnson Happy Easter from the UK Brian ! 
+                </blockquote>
+                <samp>ANGER</samp>
+            </li>
+            <li>
+                <blockquote>
+                    lmaoo literally everything in my life sucks soo much rn 
+                </blockquote>
+                <samp>JOY</samp> 
+            </li>
+        </ul>
 
         <h2>Text to Speech</h2>
         <p>For our baseline text-to-speech model, we use the macOS <code>say</code> command and simple pitch envelopes.</p>

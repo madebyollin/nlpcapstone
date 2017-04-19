@@ -291,6 +291,12 @@ hr {
     display: inline-block;
 }
 
+.katex {
+    font-size: 1em !important;
+}
+
 div.katex-math {
     text-align: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
