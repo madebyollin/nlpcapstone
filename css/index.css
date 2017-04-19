@@ -259,6 +259,8 @@ hr {
 
 .katex {
   font-size: 1em !important; }
+  .katex * {
+    font-family: inherit; }
 
 div.katex-math {
   text-align: center;
