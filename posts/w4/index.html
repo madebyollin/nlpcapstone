@@ -24,12 +24,13 @@
 
         <h2>Data Collection</h2>
         <p>
-            We implemented a simple script to consume status updates from the Twitter
+            We wrote a simple script to consume status updates from the Twitter
             <a href="https://dev.twitter.com/streaming/overview">Streaming APIs</a>
             (via <a href="https://github.com/tweepy/tweepy">Tweepy</a>). The script
             filters status updates that satisfy some basic criteria:
             <ul>
                 <li>Written in English (<a href="https://dev.twitter.com/streaming/overview/request-parameters#language">machine detected</a>)</li>
+                <li>At least 50 characters long</li>
                 <li>Contains exactly one emoji, which must be at the end of the status udpate</li>
             </ul>
         </p>
