@@ -23,20 +23,38 @@
         <p>We present an initial, baseline approach for our task of emotional text-to-speech generation.</p>
 
         <h2>Data Collection</h2>
-        <p>We have constructed a simple data pipeline for collecting emotion-tagged sentences from Twitter.</p>
-        <p>Our data collection process works as follows:</p>
-        <ol>
-            <li><span class="placeholder">Step the first</span></li>
-            <li><span class="placeholder">Step the second</span></li>
-            <li><span class="placeholder">Step three, the usurper</span></li>
-        </ol>
-        <p>Some examples of (correctly tagged) Tweets are as follows:</p>
-        <h4>Happy</h4>
-        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Sprite gen work by my awesome undergrad mentee (Nick Liao, not on twitter). This is what they meant by training pokemon, right? <a href="https://t.co/iDx93hhpMa">pic.twitter.com/iDx93hhpMa</a></p>&mdash; Matthew Guzdial (@MatthewGuz) <a href="https://twitter.com/MatthewGuz/status/852234817383149569">April 12, 2017</a></blockquote>
-        <h4>Sadness</h4>
-        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I&#39;m done with BEGAN and I don&#39;t want to do GAN again :( <a href="https://t.co/4e2gQqoz4W">https://t.co/4e2gQqoz4W</a> <a href="https://t.co/zAoVnWL2HP">pic.twitter.com/zAoVnWL2HP</a></p>&mdash; Taehoon Kim (@carpedm20) <a href="https://twitter.com/carpedm20/status/850570697399074816">April 8, 2017</a></blockquote>
-        <p>An example of a Tweet that gets classified incorrectly is:</p>
-        <span class="placeholder">example</span>
+        <p>
+            We implemented a simple script to consume status updates from the Twitter
+            <a href="https://dev.twitter.com/streaming/overview">Streaming APIs</a>
+            (via <a href="https://github.com/tweepy/tweepy">Tweepy</a>). The script
+            filters status updates that satisfy some basic criteria:
+            <ul>
+                <li>Written in English (<a href="https://dev.twitter.com/streaming/overview/request-parameters#language">machine detected</a>)</li>
+                <li>Contains exactly one emoji, which must be at the end of the status udpate</li>
+            </ul>
+        </p>
+        <p>
+            The collected status updates are labeled according to the terminating
+            emoji. For this first strawman, we used only the following mappings:
+            <ul>
+                <li>Joy: 😀 😁 😃 😄 🙂</li>
+                <li>Anger: 😡 😠 💢</li>
+            </ul>
+        </p>
+        <p>
+            For the most parts, this gives reasonable results. Some examples of
+            tweets correctly tagged by our script are:
+        </p>
+        <h4>Joy</h4>
+        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">What a great day, sun is shining and I am smiling 😀</p>&mdash; Darkleich Files (@darkleich_files) <a href="https://twitter.com/darkleich_files/status/853749486681804803">April 16, 2017</a></blockquote>
+        <h4>Anger</h4>
+        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Weekend just got even worse. I hate all of you. 😡</p>&mdash; RellyRell (@HateTheseFools) <a href="https://twitter.com/HateTheseFools/status/853722382598631426">April 16, 2017</a></blockquote>
+        <p>
+            As it turns out, however, the 🙂 emoji is often used sarcastically, and
+            many of the captured status updates with that emoji are <em>not</em>,
+            in fact, joyful, such as:
+        </p>
+        <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I sure hope the devil likes a pretty face, because that attitude of yours is sending you straight to hell. 🙂</p>&mdash; Kaylee (@k_greenroydd) <a href="https://twitter.com/k_greenroydd/status/853747338585804800">April 16, 2017</a></blockquote>
 
         <h2>Multi-Class Classification</h2>
         <span class="placeholder">Work-in-progress</span>
