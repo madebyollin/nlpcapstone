@@ -169,10 +169,20 @@
 
         <h3>LSTM classifier</h3>
 
-        <p>As a second, more advanced baseline model, we implemented a character-level LSTM in TensorFlow. The input to the model is the full text of a tweet encoded as a sequence one-hot vectors. The LSTM's hidden state size is 64. The output from the final time step of the LSTM is projected into 6 dimensions (the number of labels) with a standard dense layer, and then run through a softmax to obtain a probability distribution.</p>
-        <p>
-        After training for about 8 hours, the model as described achieved a stunning <strong>99.99%</strong> accuracy on the training set and <strong>26.24%</strong> dev accuracy, suggesting egregious and unabashed overfitting. So, we re-trained the network with 50% dropout applied to the LSTM cell inputs and outputs. This resulted substantially improved performance, which is what we report below.
-        </p>
+        <p>As a second, more advanced baseline model, we implemented a
+        character-level LSTM in TensorFlow. The input to the model is the full
+        text of a tweet encoded as a sequence of one-hot vectors. The LSTM's
+        hidden state size is 64. The output from the final time step of the LSTM
+        is projected into 6 dimensions (the number of labels) with a standard
+        dense layer, and then run through a softmax to obtain a probability
+        distribution.</p>
+        
+        <p>After training for about 8 hours, the model as described achieved a
+        stunning <strong>99.99%</strong> accuracy on the training set and
+        <strong>26.24%</strong> dev accuracy, suggesting egregious and unabashed
+        overfitting. So, we re-trained the network with 50% dropout applied to
+        the LSTM cell inputs and outputs. This resulted in substantially
+        improved performance, which we report below.</p>
 
         <table>
             <thead>
@@ -240,8 +250,9 @@
             </tbody>
         </table>
 
-        <p>Also, here is a graph of the LSTM's mean cross-entropy loss over about 100,000 epochs
-        of training. (The loss reported is the average loss during the final 10 steps of the epoch).</p>
+        <p>Also, here is a graph of the LSTM's mean cross-entropy loss over
+        about 2,000 epochs of training, or about 116,000 gradient update steps.
+        (The loss reported is the average loss during the final 10 steps of the epoch.)</p>
 
         <img src="lstmloss.png">
 
