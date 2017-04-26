@@ -87,144 +87,174 @@
 
         <h2>Multi-Class Classification</h2>
 
-        <p>As a second baseline model, we implemented a character-level LSTM.
-        The input to the model is the full</p>
+        <p>On this front, we have concentrated on adding an LSTM model to our pipeline, training it, and
+        attempting to optimize its performance.
+        We also present a refined evaluation of our first strawman model, the unigram classifier.
+        </p>
 
-    <h3>Unigram classifier</h3>
-    <p>We used an UNK threshold of 7, which resulted in a vocabulary size of 1070.</p>
+        <h3>Unigram classifier</h3>
+        <p>We tuned the UNK-threshold hyperparameter by a brute-force search in the range of 1 to 50.
+        The dev accuracy was best with an UNK-threshold of 7 and corresponding vocabulary size of 1070 tokens.
+        Here is a summary of its performance:
+        </p>
 
-    <table>
-        <thead>
-            <tr>
-                <th></th>
-                <th>Training</th>
-                <th>Test (dev)</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <tr>
-                <td>Overall accuracy</td>
-                <td>0.6776</td>
-                <td>0.3513</td>
-            </tr>
-            <tr>
-                <td>Mfc  accuracy</td>
-                <td>0.2180</td>
-                <td>0.1918</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <thead>
-                 <tr>
+        <table>
+            <thead>
+                <tr>
                     <th></th>
-                    <th>Label 0 (NEUTRAL)</th>
-                    <th>Label 1 (JOY)</th>
-                    <th>Label 2 (SADNESS)</th>
-                    <th>Label 3 (ANGER)</th>
-                    <th>Label 4 (DISGUST)</th>
-                    <th>Label 5 (SURPRISE)</th>
-                </tr>   
-        </thead>
-        <tbody>
-            <tr>
-                <td>Precision</td>
-                <td>0.6717</td>
-                <td>0.6456</td>
-                <td>0.6442</td>
-                <td>0.7341</td>
-                <td><span class="placeholder">No data</span></td>
-                <td>0.7209</td>
-            </tr>
-            <tr>
-                <td>Recall</td>
-                <td>0.6417</td>
-                <td>0.6777</td>
-                <td>0.7256</td>
-                <td>0.6941</td>
-                <td><span class="placeholder">No data</span></td>
-                <td>0.6309</td>
-            </tr>
-            <tr>
-                <td>F1</td>
-                <td>0.6564</td>
-                <td>0.6613</td>
-                <td>0.6825</td>
-                <td>0.7136</td>
-                <td><span class="placeholder">No data</span></td>
-                <td>0.6729</td>
-            </tr>
-        </tbody>
-    </table>
+                    <th>Training</th>
+                    <th>Test (dev)</th>
+                </tr>
+            </thead>
+            <tbody>
 
-    <h3>LSTM classifier</h3>
-    <table>
+                <tr>
+                    <td>Overall accuracy</td>
+                    <td>0.6776</td>
+                    <td>0.3513</td>
+                </tr>
+                <tr>
+                    <td>Mfc  accuracy</td>
+                    <td>0.2180</td>
+                    <td>0.1918</td>
+                </tr>
+            </tbody>
+        </table>
 
-        <thead>
-            <tr>
-                <th></th>
-                <th>Training</th>
-                <th>Test (dev)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Overall accuracy</td>
-                <td>0.6972</td>
-                <td>0.6940</td>
-            </tr>
-            <tr>
-                <td>Mfc  accuracy</td>
-                <td>0.2180</td>
-                <td>0.1918</td>
-            </tr>
-        </tbody>
-    </table>
+        <p>Test data metrics:</p>
+        <table>
+            <thead>
+                     <tr>
+                        <th></th>
+                        <th>Label 0 (NEUTRAL)</th>
+                        <th>Label 1 (JOY)</th>
+                        <th>Label 2 (SADNESS)</th>
+                        <th>Label 3 (ANGER)</th>
+                        <th>Label 4 (DISGUST)</th>
+                        <th>Label 5 (SURPRISE)</th>
+                    </tr>   
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Precision</td>
+                    <td>0.3333</td>
+                    <td>0.4057</td>
+                    <td>0.3084</td>
+                    <td>0.3922</td>
+                    <td><span class="placeholder">No data</span></td>
+                    <td>0.2881</td>
+                </tr>
+                <tr>
+                    <td>Recall</td>
+                    <td>0.2804</td>
+                    <td>0.4574</td>
+                    <td>0.3708</td>
+                    <td>0.3960</td>
+                    <td><span class="placeholder">No data</span></td>
+                    <td>0.2329</td>
+                </tr>
+                <tr>
+                    <td>F1</td>
+                    <td>0.3046</td>
+                    <td>0.4300</td>
+                    <td>0.3367</td>
+                    <td>0.3941</td>
+                    <td><span class="placeholder">No data</span></td>
+                    <td>0.2576</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table>
-        <thead>
-                 <tr>
+        <h3>LSTM classifier</h3>
+        
+        <p>As a second, more advanced baseline model, we implemented a character-level LSTM in TensorFlow.
+        The input to the model is the full text of a tweet encoded as a sequence one-hot vectors.
+        The LSTM's hidden state size is 64. The output from the final time step of the LSTM
+        is projected into 6 dimensions (the number of labels) with a standard dense layer, and
+        then run through a softmax to obtain a probability distribution.
+        After training for about 8 hours, the model as described achieved a stunning 99.99%
+        accuracy on the training set and 26.24% dev accuracy. So, we re-trained the network
+        with 50% dropout applied to the LSTM cell inputs and outputs. This resulted in much
+        better performance, which is what we report below.
+        </p>
+
+        <table>
+            <thead>
+                <tr>
                     <th></th>
-                    <th>Label 0 (NEUTRAL)</th>
-                    <th>Label 1 (JOY)</th>
-                    <th>Label 2 (SADNESS)</th>
-                    <th>Label 3 (ANGER)</th>
-                    <th>Label 4 (DISGUST)</th>
-                    <th>Label 5 (SURPRISE)</th>
-                </tr>   
-        </thead>
-        <tbody>
-            <tr>
-                <td>Precision</td>
-                <td>0.6814</td>
-                <td>0.7353</td>
-                <td>0.6763</td>
-                <td>0.7157</td>
-                <td><span class="placeholder">No data</span></td>
-                <td>0.6759</td>
-            </tr>
-            <tr>
-                <td>Recall</td>
-                <td>0.7234</td>
-                <td>0.6347</td>
-                <td>0.7223</td>
-                <td>0.7419</td>
-                <td><span class="placeholder">No data</span></td>
-                <td>0.6450</td>
-            </tr>
-            <tr>
-                <td>F1</td>
-                <td>0.7018</td>
-                <td>0.6813</td>
-                <td>0.6985</td>
-                <td>0.7286</td>
-                <td><span class="placeholder">No data</span></td>
-                <td>0.6601</td>
-            </tr>
-        </tbody>
-    </table>
+                    <th>Training</th>
+                    <th>Test (dev)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Overall accuracy</td>
+                    <td>0.6972</td>
+                    <td>0.6940</td>
+                </tr>
+                <tr>
+                    <td>Mfc  accuracy</td>
+                    <td>0.2180</td>
+                    <td>0.1918</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Test data metrics:</p>
+        <table>
+            <thead>
+                     <tr>
+                        <th></th>
+                        <th>Label 0 (NEUTRAL)</th>
+                        <th>Label 1 (JOY)</th>
+                        <th>Label 2 (SADNESS)</th>
+                        <th>Label 3 (ANGER)</th>
+                        <th>Label 4 (DISGUST)</th>
+                        <th>Label 5 (SURPRISE)</th>
+                    </tr>   
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Precision</td>
+                    <td>0.7170</td>
+                    <td>0.7021</td>
+                    <td>0.5612</td>
+                    <td>0.7429</td>
+                    <td><span class="placeholder">No data</span></td>
+                    <td>0.7705</td>
+                </tr>
+                <tr>
+                    <td>Recall</td>
+                    <td>0.7103</td>
+                    <td>0.7021</td>
+                    <td>0.6180</td>
+                    <td>0.7723</td>
+                    <td><span class="placeholder">No data</span></td>
+                    <td>0.6438</td>
+                </tr>
+                <tr>
+                    <td>F1</td>
+                    <td>0.7136</td>
+                    <td>0.7021</td>
+                    <td>0.5882</td>
+                    <td>0.7573</td>
+                    <td><span class="placeholder">No data</span></td>
+                    <td>0.7015</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Also, here is a graph of the LSTM's mean cross-entropy loss over about 100,000 epochs
+        of training. (The loss reported is the average loss during the final 10 steps of the epoch).</p>
+
+        <img src="lstmloss.png">
+
+        <h3>Plans for future models</h3>
+
+        <p>When more training data are collected, we will explore a word-level LSTM with
+        a trained word embedding layer. We will also try using an emotional
+        lexicon presented by <a href="http://saifmohammad.com/">Saif Mohammad</a>.
+        </p>
 
 <!--
 UnigramClassifier
