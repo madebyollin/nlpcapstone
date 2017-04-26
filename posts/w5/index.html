@@ -32,6 +32,262 @@
 
         <h2>Multi-Class Classification</h2>
 
+        <p>As a second baseline model, we implemented a character-level LSTM.
+        The input to the model is the full</p>
+
+    <h3>Unigram classifier</h3>
+    <p>We used an UNK threshold of 7, which resulted in a vocabulary size of 1070.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Training</th>
+                <th>Test (dev)</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>Overall accuracy</td>
+                <td>0.6776</td>
+                <td>0.3513</td>
+            </tr>
+            <tr>
+                <td>Mfc  accuracy</td>
+                <td>0.2180</td>
+                <td>0.1918</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+                 <tr>
+                    <th></th>
+                    <th>Label 0 (NEUTRAL)</th>
+                    <th>Label 1 (JOY)</th>
+                    <th>Label 2 (SADNESS)</th>
+                    <th>Label 3 (ANGER)</th>
+                    <th>Label 4 (DISGUST)</th>
+                    <th>Label 5 (SURPRISE)</th>
+                </tr>   
+        </thead>
+        <tbody>
+            <tr>
+                <td>Precision</td>
+                <td>0.6717</td>
+                <td>0.6456</td>
+                <td>0.6442</td>
+                <td>0.7341</td>
+                <td><span class="placeholder">No data</span></td>
+                <td>0.7209</td>
+            </tr>
+            <tr>
+                <td>Recall</td>
+                <td>0.6417</td>
+                <td>0.6777</td>
+                <td>0.7256</td>
+                <td>0.6941</td>
+                <td><span class="placeholder">No data</span></td>
+                <td>0.6309</td>
+            </tr>
+            <tr>
+                <td>F1</td>
+                <td>0.6564</td>
+                <td>0.6613</td>
+                <td>0.6825</td>
+                <td>0.7136</td>
+                <td><span class="placeholder">No data</span></td>
+                <td>0.6729</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>LSTM classifier</h3>
+    <table>
+
+        <thead>
+            <tr>
+                <th></th>
+                <th>Training</th>
+                <th>Test (dev)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Overall accuracy</td>
+                <td>0.6972</td>
+                <td>0.6940</td>
+            </tr>
+            <tr>
+                <td>Mfc  accuracy</td>
+                <td>0.2180</td>
+                <td>0.1918</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <thead>
+                 <tr>
+                    <th></th>
+                    <th>Label 0 (NEUTRAL)</th>
+                    <th>Label 1 (JOY)</th>
+                    <th>Label 2 (SADNESS)</th>
+                    <th>Label 3 (ANGER)</th>
+                    <th>Label 4 (DISGUST)</th>
+                    <th>Label 5 (SURPRISE)</th>
+                </tr>   
+        </thead>
+        <tbody>
+            <tr>
+                <td>Precision</td>
+                <td>0.6814</td>
+                <td>0.7353</td>
+                <td>0.6763</td>
+                <td>0.7157</td>
+                <td><span class="placeholder">No data</span></td>
+                <td>0.6759</td>
+            </tr>
+            <tr>
+                <td>Recall</td>
+                <td>0.7234</td>
+                <td>0.6347</td>
+                <td>0.7223</td>
+                <td>0.7419</td>
+                <td><span class="placeholder">No data</span></td>
+                <td>0.6450</td>
+            </tr>
+            <tr>
+                <td>F1</td>
+                <td>0.7018</td>
+                <td>0.6813</td>
+                <td>0.6985</td>
+                <td>0.7286</td>
+                <td><span class="placeholder">No data</span></td>
+                <td>0.6601</td>
+            </tr>
+        </tbody>
+    </table>
+
+<!--
+UnigramClassifier
+UnigramClassifier.train: vocabulary size is 1070
+Training data
+    Frequencies: [ 0.21373863  0.21685017  0.21804691  0.21517472  0.          0.13618956]
+    Count:  4178
+    Acc:    0.6776
+    Mfc:    0.2180
+Label 0 (NEUTRAL)
+    Prec:   0.6717
+    Rec:    0.6417
+    F1: 0.6564
+Label 1 (JOY)
+    Prec:   0.6456
+    Rec:    0.6777
+    F1: 0.6613
+Label 2 (SADNESS)
+    Prec:   0.6442
+    Rec:    0.7256
+    F1: 0.6825
+Label 3 (ANGER)
+    Prec:   0.7341
+    Rec:    0.6941
+    F1: 0.7136
+Label 4 (DISGUST)
+    [absent]
+Label 5 (SURPRISE)
+    Prec:   0.7209
+    Rec:    0.6309
+    F1: 0.6729
+Test data
+    Frequencies: [ 0.23060345  0.20258621  0.19181034  0.21767241  0.          0.15732759]
+    Count:  464
+    Acc:    0.3513
+    Mfc:    0.1918
+Label 0 (NEUTRAL)
+    Prec:   0.3333
+    Rec:    0.2804
+    F1: 0.3046
+Label 1 (JOY)
+    Prec:   0.4057
+    Rec:    0.4574
+    F1: 0.4300
+Label 2 (SADNESS)
+    Prec:   0.3084
+    Rec:    0.3708
+    F1: 0.3367
+Label 3 (ANGER)
+    Prec:   0.3922
+    Rec:    0.3960
+    F1: 0.3941
+Label 4 (DISGUST)
+    [absent]
+Label 5 (SURPRISE)
+    Prec:   0.2881
+    Rec:    0.2329
+    F1: 0.2576
+
+LstmClassifier
+Restored model from ./ckpts/lstm-113973
+Training data
+    Frequencies: [ 0.21373863  0.21685017  0.21804691  0.21517472  0.          0.13618956]
+    Count:  4178
+    Acc:    0.6972
+    Mfc:    0.2180
+Label 0 (NEUTRAL)
+    Prec:   0.6814
+    Rec:    0.7234
+    F1: 0.7018
+Label 1 (JOY)
+    Prec:   0.7353
+    Rec:    0.6347
+    F1: 0.6813
+Label 2 (SADNESS)
+    Prec:   0.6763
+    Rec:    0.7223
+    F1: 0.6985
+Label 3 (ANGER)
+    Prec:   0.7157
+    Rec:    0.7419
+    F1: 0.7286
+Label 4 (DISGUST)
+    [absent]
+Label 5 (SURPRISE)
+    Prec:   0.6759
+    Rec:    0.6450
+    F1: 0.6601
+Restored model from ./ckpts/lstm-113973
+Test data
+    Frequencies: [ 0.23060345  0.20258621  0.19181034  0.21767241  0.          0.15732759]
+    Count:  464
+    Acc:    0.6940
+    Mfc:    0.1918
+Label 0 (NEUTRAL)
+    Prec:   0.7170
+    Rec:    0.7103
+    F1: 0.7136
+Label 1 (JOY)
+    Prec:   0.7021
+    Rec:    0.7021
+    F1: 0.7021
+Label 2 (SADNESS)
+    Prec:   0.5612
+    Rec:    0.6180
+    F1: 0.5882
+Label 3 (ANGER)
+    Prec:   0.7429
+    Rec:    0.7723
+    F1: 0.7573
+Label 4 (DISGUST)
+    [absent]
+Label 5 (SURPRISE)
+    Prec:   0.7705
+    Rec:    0.6438
+    F1: 0.7015
+-->
+
         <h2>Text to Speech</h2>
 
 
