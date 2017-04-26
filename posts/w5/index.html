@@ -85,6 +85,8 @@
         </p>
         <!-- TODO: <p><span class="placeholder">Comparison on specific examples</span></p> -->
 
+        <p>We will continue to make improvements to our data pipeline, including the possible addition of further sources.</p>
+
         <h2>Multi-Class Classification</h2>
 
         <p>On this front, we have concentrated on adding an LSTM model to our pipeline, training it, and
@@ -132,7 +134,7 @@
                         <th>Label 3 (ANGER)</th>
                         <th>Label 4 (DISGUST)</th>
                         <th>Label 5 (SURPRISE)</th>
-                    </tr>   
+                    </tr>
             </thead>
             <tbody>
                 <tr>
@@ -166,16 +168,10 @@
         </table>
 
         <h3>LSTM classifier</h3>
-        
-        <p>As a second, more advanced baseline model, we implemented a character-level LSTM in TensorFlow.
-        The input to the model is the full text of a tweet encoded as a sequence one-hot vectors.
-        The LSTM's hidden state size is 64. The output from the final time step of the LSTM
-        is projected into 6 dimensions (the number of labels) with a standard dense layer, and
-        then run through a softmax to obtain a probability distribution.
-        After training for about 8 hours, the model as described achieved a stunning 99.99%
-        accuracy on the training set and 26.24% dev accuracy. So, we re-trained the network
-        with 50% dropout applied to the LSTM cell inputs and outputs. This resulted in much
-        better performance, which is what we report below.
+
+        <p>As a second, more advanced baseline model, we implemented a character-level LSTM in TensorFlow. The input to the model is the full text of a tweet encoded as a sequence one-hot vectors. The LSTM's hidden state size is 64. The output from the final time step of the LSTM is projected into 6 dimensions (the number of labels) with a standard dense layer, and then run through a softmax to obtain a probability distribution.</p>
+        <p>
+        After training for about 8 hours, the model as described achieved a stunning <strong>99.99%</strong> accuracy on the training set and <strong>26.24%</strong> dev accuracy, suggesting egregious and unabashed overfitting. So, we re-trained the network with 50% dropout applied to the LSTM cell inputs and outputs. This resulted substantially improved performance, which is what we report below.
         </p>
 
         <table>
@@ -211,7 +207,7 @@
                         <th>Label 3 (ANGER)</th>
                         <th>Label 4 (DISGUST)</th>
                         <th>Label 5 (SURPRISE)</th>
-                    </tr>   
+                    </tr>
             </thead>
             <tbody>
                 <tr>
@@ -374,7 +370,15 @@ Label 5 (SURPRISE)
 -->
 
         <h2>Text to Speech</h2>
-
+        <p>We have made the following improvements to TTS since the previous baseline:
+        </p>
+        <ul>
+            <li><strong>Multi-Class Pitch Envelopes</strong>: Additional pitch envelopes for the newly-supported classes.</li>
+            <li><strong>Integration with Classifier</strong>: <code>text_to_speech.py</code> now provides a RESL (Read-Emote-Say-Loop) to quickly classify+speak text.</li>
+            <li><strong>Integration with Front-End</strong>: We've set up a local Flask server with a web front-end to enable TTS from an attractive web interface (available on our <a href="https://github.com/team-butterfly/nlpcapstonecode">repo</a>):</li>
+            <img src="demo.png" style="border-radius:8px; box-shadow: 0px 8px 32px -16px black, 0px 0px 0px 0.5px rgba(0,0,0,.1);"/>
+        </ul>
+        <p>In addition, we've begun work on a more advanced speech processing pipeline using style-transfer from emotive voices.  Initial experiments with a patch-based system have yielded poor results, so we intend to transition to a neural-network based post-processor for future iterations.</p>
 
         <hr />
         <p>The code for our baseline implementations is available on <a href="https://github.com/team-butterfly/nlpcapstonecode">GitHub</a>.</p>

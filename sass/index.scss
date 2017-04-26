@@ -59,6 +59,7 @@ body, html {
     padding: 0;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
     font-family: Nunito;
     font-weight: 400;
@@ -214,6 +215,12 @@ main {
     width: 40%;
     min-width: 640px;
     margin: 0 auto;
+    position: relative;
+
+    img {
+        max-width: 100%;
+    }
+
     a.header {
         display: block;
         width: 100%;

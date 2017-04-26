@@ -157,7 +157,10 @@ main {
 .post {
   width: 40%;
   min-width: 640px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  position: relative; }
+  .post img {
+    max-width: 100%; }
   .post a.header {
     display: block;
     width: 100%;
