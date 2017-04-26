@@ -22,13 +22,68 @@
         <p>We present an improved baseline approach for our task of emotional text-to-speech generation, and provide comparisons with our initial baseline.</p>
 
         <h2>Data Collection</h2>
-        <p>We have made the following improvements to our existing data collection pipeline to improve tagging quality:</p>
-        <ul>
-            <li><strong>Improvement</strong>: <span class="placeholder">Description</span></li>
-        </ul>
-        <p>These improvements have the overall effect of <span class="placeholder">improving tagging quality and collection speed</span>, as well as <span class="placeholder">adding additional emotional classes</span>.</p>
-        <p>For example, <span class="placeholder">performance comparison on accuracy, speed, whatever</span></p>
-        <p><span class="placeholder">Comparison on specific examples</span></p>
+        <p>
+            Since the first strawman, we have:
+            <ul>
+                <li>
+                    <strong>Removed the ambiguous 🙂 emoji from our emotion-emoji
+                    mappings</strong>. The alternative of detecting sarcastic
+                    tweets is itself an area of ongoing research and well beyond
+                    the scope of our project.
+                </li>
+                <li>
+                    <strong>Diversified the range of emotion labels</strong>. In
+                    addition to joy and anger, we now also tag tweets as neutral,
+                    sad, and surprised.
+                </li>
+                <li>
+                    <strong>Expanded our corpus</strong>. Our full dataset now
+                    includes just under ten thousand tweets, divided roughly evenly
+                    between five emotions.
+                </li>
+            </ul>
+        </p>
+        <h3>Error Analysis</h3>
+        <p>
+            Error analysis for the data collection pipeline involves comparing
+            the assigned labels with our own judgment. We examined ten tweets
+            for each label:
+            <table>
+                <tr>
+                    <th>Assigned Label</th>
+                    <th>Agree / Disagree</th>
+                </tr>
+                <tr>
+                    <td>Neutral</td>
+                    <td>0 / 10</td>
+                </tr>
+                <tr>
+                    <td>Joy</td>
+                    <td>6 / 4</td>
+                </tr>
+                <tr>
+                    <td>Sadness</td>
+                    <td>8 / 2</td>
+                </tr>
+                <tr>
+                    <td>Anger</td>
+                    <td>10 / 0</td>
+                </tr>
+                <tr>
+                    <td>Surprise</td>
+                    <td>5 / 5</td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            With the trailing-emoji tagging method, angry tweets are tagged by
+            far the most accurately, and sad tweets are also tagged reasonably
+            well. Beyond that, however, there is considerable ambiguity and
+            overlap in how emojis are used. The "neutral" emojis, in
+            particular, are actually more often used in disappointed contexts:
+            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I won&#39;t be satisfied with my face until I get a nose job 😐</p>&mdash; إيزيس 🌸✨ (@iizizzzz) <a href="https://twitter.com/iizizzzz/status/856334836956639235">April 24, 2017</a></blockquote>
+        </p>
+        <!-- TODO: <p><span class="placeholder">Comparison on specific examples</span></p> -->
 
         <h2>Multi-Class Classification</h2>
 
