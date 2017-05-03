@@ -18,8 +18,33 @@
     <div class="post">
         <a class="header" href="/"><span class="butterfly"></span></a>
         <h1>Advanced Model Attempt I</h1>
-        <p>We present some more advanced model attempts that build upon our strawman models.</p>
-        
+        <p>We present an advanced model that builds upon our <a href="/posts/w4/">strawman</a> <a href="/posts/w5/">models</a>.</p>
+
+        <h2>Data Collection</h2>
+        <p>
+            Based on our error analysis from the strawman attempts and the
+            feedback from our in-class presentation, we have refined our data
+            collection process slightly:
+            <ul>
+                <li>
+                    <strong>Reduced emotion palette</strong>: our emotion
+                    tagger was not classifying "neutral" or "surprised" tweets
+                    accurately enough to merit continuing to collect tweets in
+                    either category. This is not unreasonable; it seems
+                    unlikely that Twitter users would bother sending out a
+                    status update if they were feeling completely neutral at
+                    the moment!
+                </li>
+                <li>
+                    <strong>Expanded corpus</strong>: in addition to reducing
+                    our emotion palette, we also adjusted our emoji-emotion
+                    mappings slightly, which has had a net effect of
+                    streamlining our data collection process. We now have over
+                    nine thousand tweets for each emotion!
+                </li>
+            </ul>
+        </p>
+
         <h2>Classifier</h2>
 
         <p>We have continued to build upon our strawman classifiers by:</p>
@@ -97,7 +122,18 @@
             </tbody>
         </table>
 
-        <h2>Phase Reconstruction</h2>
+        <h2>Text to Speech</h2>
+        <p>In preparation for a style-transfer based model for emotional text to speech, we've begun experimenting with conditional GANs for phase reconstruction.</p>
+        <p>Phase reconstruction is the task of generating plausible phase information given an amplitude signal; the current version of the model uses a successive approximation algorithm to do this, but results sound imperfect.</p>
+        <p>Although phase reconstruction is a simpler task than our ultimate goal of emotion transfer, it is simple yet underspecified and therefore presents a good test case for adversarial models.</p>
+        <h3>Samples</h3>
+        <p>Some samples from various iterations of the adversarial phase reconstruction are as follows (following <code>tanh</code> + normalization):</p>
+        <img src="gan.png"/>
+        <p>In contrast, real phase data (again, normalized, and for different training tiles) looks like this:</p>
+        <img src="real.png"/>
+        <p>There is a clear difference in distributions, even among the closest iterations of the generator.  Simply increasing the capacity of the generator and discriminator has thus far led to collapse of the model, however (rather than more realistic results).</p>
+        <h3>Conclusion</h3>
+        <p>In short, training is not yet sufficient to produce compelling results for phase reconstruction, and some further modifications to model architecture will be required.  If successful, an adversarial phase reconstruction model will not only improve the quality of emotional text to speech under the current baseline algorithm, but also give useful insights and techniques for building our target text-to-speech processing model.</p>
 
         <p class="footnote" id="f1">
             <span class="tag">1</span> Saif Mohammad, Pierre Charron. NRC Word-Emotion Association Lexicon.
