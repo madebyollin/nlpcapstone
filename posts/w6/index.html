@@ -18,11 +18,93 @@
     <div class="post">
         <a class="header" href="/"><span class="butterfly"></span></a>
         <h1>Advanced Model Attempt I</h1>
-        <p>We present an advanced model that builds upon our strawman models.</p>
+        <p>We present some more advanced model attempts that build upon our strawman models.</p>
         
         <h2>Classifier</h2>
 
+        <p>We have continued to build upon our strawman classifiers by:</p>
+        <ul>
+            <li>Obtaining an <strong>emotional lexicon</strong> data set and applying this in a bag-of-words model
+            and in an LSTM model</li>
+            <li>Implementing a <strong>bidirectional word-level LSTM</strong></li>
+        </ul>
+
+        <h3>Emotional Lexicon</h3>
+
+        <p>We requested and obtained a copy of a <a href="http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm">word-emotion association lexicon</a>, also known as EmoLex, thanks to
+        research by Saif Mohammad and Pierre Charron <a class="tag" href="#f1">[1]</a>. This lexicon contains 14,182 words.
+        Each word is scored either 0 or 1 for each of eight emotions (anger, anticipation, disgust, fear, joy, sadness, surprise, trust) and also 0 or 1 for positive and negative sentiments. 
+        We applied these associations in a bag-of-words model by summing the associations for every word in the sentence into a 10-dimensional
+        vector and feeding this into a linear model.</p>
+
+        <p>We also tried feeding the 10-dimensional associations as a sequence into an LSTM.</p>
+
+        <p>The performance of both models was unsatisfactory. This may be because the vocabulary is small, and
+        so our tweet samples suffer from a large number of OOV words. About 10% of our collected tweets are completely OOV with respect
+        to EmoLex. In fact, over the entire training set, only 16.3% of the words observed <em>are</em> in EmoLex.</p>
+
+        <h3>Word-level LSTM</h3>
+
+        <p>To overcome the poor performance of the character LSTM and EmoLex attempts, we moved on to
+        a word-level LSTM using GloVe vectors.</p>
+        
+        <p>As input, the model receives a sentence represented as a sequence of 200-dimensional word embeddings.
+        In training, we initialize the word embedding matrix with GloVe's Twitter embeddings <a class="tag" href="#f2">[2]</a>
+        and allow the gradients to backpropagate to the embedding matrix for the first few epochs. The idea is to allow
+        the LSTM to fine-tune the embeddings because general-purpose embeddings can have some undesirable properties; for example, it
+        is often the case that antonyms are nearest neighbors of each other, which is detrimental to sentiment and emotion classification.
+        After letting the model enhance the embeddings, we freeze the embedding matrix
+        and continue training the rest of the model's parameters. We also apply 50% dropout to the LSTM cell inputs
+        and outputs.
+        </p>
+
+        <h3>Classifier Metrics</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>Model name</td>
+                    <td>Train accuracy</td>
+                    <td>Validation accuracy</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Most frequent class</td>
+                    <td>33.4%</td>
+                    <td>33.0%</td>
+                </tr>
+                <tr>
+                    <td>Bag-of-words linear model</td>
+                    <td>63.2%</td>
+                    <td>52.1%</td>
+                </tr>
+                <tr>
+                    <td>EmoLex bag-of-words linear model</td>
+                    <td>40.9%</td>
+                    <td>40.5%</td>
+                </tr>
+                <tr>
+                    <td>EmoLex LSTM</td>
+                    <td>42.6%</td>
+                    <td>43.2%</td>
+                </tr>
+                <tr>
+                    <td>Word-level bidirectional LSTM</td>
+                    <td></td>
+                    <td>58.8%</td>
+                </tr>
+            </tbody>
+        </table>
+
         <h2>Phase Reconstruction</h2>
+
+        <p class="footnote" id="f1">
+            <span class="tag">1</span> Saif Mohammad, Pierre Charron. NRC Word-Emotion Association Lexicon.
+        </p>
+        <p class="footnote" id="f2">
+            <span class="tag">2</span> Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation.
+        </p>
     </div>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="/js/applykatex.js"></script>
