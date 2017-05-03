@@ -88,9 +88,9 @@
         <table>
             <thead>
                 <tr>
-                    <td>Model name</td>
-                    <td>Train accuracy</td>
-                    <td>Validation accuracy</td>
+                    <th>Model name</th>
+                    <th>Training accuracy</th>
+                    <th>Validation accuracy</th>
                 </tr>
             </thead>
             <tbody>
@@ -116,11 +116,16 @@
                 </tr>
                 <tr>
                     <td>Word-level bidirectional LSTM</td>
-                    <td></td>
-                    <td>58.8%</td>
+                    <td><strong>70%</strong></td>
+                    <td><strong>58%</strong></td>
                 </tr>
             </tbody>
         </table>
+
+        <h3>Conclusion</h3>
+
+        <p>The word-level bidirectional LSTM seems like a very promising model. We hope to improve it by training with more data
+        as it streams in from Twitter. We will also experiment with an attention mechanism!</p>
 
         <h2>Text to Speech</h2>
         <p>In preparation for a style-transfer based model for emotional text to speech, we've begun experimenting with conditional GANs for phase reconstruction.</p>
