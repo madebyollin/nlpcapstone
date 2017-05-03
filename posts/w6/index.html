@@ -18,7 +18,7 @@
     <div class="post">
         <a class="header" href="/"><span class="butterfly"></span></a>
         <h1>Advanced Model Attempt I</h1>
-        <p>We present an advanced model that builds upon our strawman models.</p>
+        <p>We present an advanced model that builds upon our <a href="/posts/w4/">strawman</a> <a href="/posts/w5/">models</a>.</p>
 
         <h2>Data Collection</h2>
         <p>
@@ -44,10 +44,21 @@
                 </li>
             </ul>
         </p>
-        
+
         <h2>Classifier</h2>
 
-        <h2>Phase Reconstruction</h2>
+        <h2>Text to Speech</h2>
+        <p>In preparation for a style-transfer based model for emotional text to speech, we've begun experimenting with conditional GANs for phase reconstruction.</p>
+        <p>Phase reconstruction is the task of generating plausible phase information given an amplitude signal; the current version of the model uses a successive approximation algorithm to do this, but results sound imperfect.</p>
+        <p>Although phase reconstruction is a simpler task than our ultimate goal of emotion transfer, it is simple yet underspecified and therefore presents a good test case for adversarial models.</p>
+        <h3>Samples</h3>
+        <p>Some samples from various iterations of the adversarial phase reconstruction are as follows (following <code>tanh</code> + normalization):</p>
+        <img src="gan.png"/>
+        <p>In contrast, real phase data (again, normalized, and for different training tiles) looks like this:</p>
+        <img src="real.png"/>
+        <p>There is a clear difference in distributions, even among the closest iterations of the generator.  Simply increasing the capacity of the generator and discriminator has thus far led to collapse of the model, however (rather than more realistic results).</p>
+        <h3>Conclusion</h3>
+        <p>In short, training is not yet sufficient to produce compelling results for phase reconstruction, and some further modifications to model architecture will be required.  If successful, an adversarial phase reconstruction model will not only improve the quality of emotional text to speech under the current baseline algorithm, but also give useful insights and techniques for building our target text-to-speech processing model.</p>
     </div>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="/js/applykatex.js"></script>
