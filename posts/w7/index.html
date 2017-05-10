@@ -47,7 +47,18 @@
         <h2>Classifier</h2>
 
         <h2>Text to Speech</h2>
-        
+        <p>We've continued the development of our adversarial speech/style style transfer model for emotional text-to-speech, this time focusing on the core autoencoder (rather than then adversarial loss).</p>
+        <p>The plan for this model is to decompose input speech into <strong>time</strong> and frequency components, along with corresponding encoders for each, as well as a single decoder which combines these encodings back into the original speech signal.</p>
+        <p>We've started with a simple convolutional architecture, using pooling and strided convolutions to downsample along the time and frequency axes.  The model encodes the input signal as a stack of filters for each time step, and the sample signal as a stack of filters for each frequency band.  The number of filters is not sufficient to reconstruct the original image, in order to induce the model to develop a useful internal representation.</p>
+
+        <p>The primary failure mode of this architecture is to learn how to <em>factorize</em> the input spectrogram, without capturing any of its visual characteristics.  For example, this result from our early model:</p>
+        <img src="factorization.png" />
+        <p>The intended approaches to tackling this problem are as follows:</p>
+        <ul>
+            <li><strong>Train on disjoint signal/style pairs</strong>: rather than providing the autoencoder with identical inputs for the content and style during training, we intend to select disjoint samples from the same speaker.  This should make factorization much less effective.</li>
+            <li><strong>Adversarial loss</strong>: although ensuring convergence in GANs is difficult (as identified in the previous blog post), they offer a promising way to ensure that the autoencoder generates plausible samples (rather than an average of plausible samples) for this ultimately underspecified problem.</li>
+            <li><strong>Variational constraints</strong>: we hope to apply variational-autoencoder constraints on the hidden represententation (forcing it to be unit mean and variance) in order to further discourage factorization.</li>
+        </ul>
     </div>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="/js/applykatex.js"></script>
