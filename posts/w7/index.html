@@ -45,6 +45,41 @@
         </p>
 
         <h2>Classifier</h2>
+        <p>
+        We've implemented an <strong>attention mechanism</strong> for our word-level LSTM, modeled after
+        the approach in <a href="https://arxiv.org/pdf/1604.00077.pdf">Shen and Lee</a>.
+        Implementing this kind of attention in TensorFlow turned out to be more of a headache
+        than we imagined, due to the dynamically-sized nature of an LSTM's inputs and
+        intermediate tensors. In addition, we encountered driver issues on Azure that prevented
+        GPU usage for a few days. So, progress on this front has been slower than we would
+        like, but now it will continue full-steam ahead now that the worst parts are over.
+        </p>
+        
+        <p>
+        Shen and Lee use an attention mechanism that takes just the final state of
+        a forward-LSTM and uses this to calculate cosine similarity with input word embeddings.
+        </p>
+
+        <img src="attention.png">
+
+        <p>Right now, we are following this exactly, and using a sigmoid normalizer to
+        smooth the attention among the input sequence. This model is able to achieve
+        <strong>60%</strong> validation accuracy, which is similar to the non-attentive LSTM.</p>
+
+        <p>We'd like to do more experimentation and error analysis and comparing different techniques
+        of attention. In particular, it would be interesting to see how this attention model
+        can be tweaked, and how it compares to a simple linear model over averaged word embeddings.</p>
+
+        <p>
+        Since we have a bidirectional LSTM, we have some interesting options
+        available that we will explore:
+        </p>
+
+        <ul>
+            <li>Take an element-wise product or sum of the forward and backward final states</li>
+            <li>Concatenate the forward and backward states, then add a fully-connected layer to project them to the same
+            size as the word embeddings</li>
+        </ul>
 
         <h2>Text to Speech</h2>
         <p>We've continued the development of our adversarial speech/style style transfer model for emotional text-to-speech, this time focusing on the core autoencoder (rather than then adversarial loss).</p>
