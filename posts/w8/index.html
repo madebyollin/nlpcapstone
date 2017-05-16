@@ -35,22 +35,16 @@
         In equations, this basic attention mechanism is:</p>
         
         <div class="katex-math">
-            m = o_\text{fw}
-        </div>
-        <div class="katex-math">
-            e_t = \frac
-                {v_t \cdot m}
-                {\|v_t\| \|o_\text{fw}\|}
-            \textit{(cosine similarity)}
-        </div>
-        <div class="katex-math">
-            \alpha_t = \frac{\sigma(e_t)}{\sum_{t'=1}^T{\sigma(e_{t'})}} \textit{(smoothed)}
-        </div>
-        <div class="katex-math">
-            h = \sum_{t'=1}^T{\alpha_t v_t}
-        </div>
-        <div class="katex-math">
-            \hat{y} = softmax(h \mathbf{W_\text{out}} + b_\text{out})
+            \begin{aligned}
+                m &= o_\text{fw} \\[1em]
+                e_t &= \frac
+                        {v_t \cdot m}
+                        {\|v_t\| \|o_\text{fw}\|}
+                    \pod\text{cosine similarity} \\[1em]
+                \alpha_t &= \frac{\sigma(e_t)}{\sum_{t'=1}^T{\sigma(e_{t'})}}  \pod\text{smoothed} \\[1em]
+                h &= \sum_{t'=1}^T{\alpha_t v_t} \\[1em]
+                \hat{y} &= softmax(h \mathbf{W_\text{out}} + b_\text{out})
+            \end{aligned}
         </div>
 
         <p>The paper we referenced for this idea uses sigmoid instead of softmax for the weights
