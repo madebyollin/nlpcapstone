@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 8 : Advanced Model Attempt II</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="icon" href="/images/butterfly.png">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css"
+        integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0"
+        crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"
+        integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1"
+        crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <div class="post">
+        <a class="header" href="/"><span class="butterfly"></span></a>
+        <h1>Advanced Model Attempt II</h1>
+        <p>We present an advanced model that builds upon our previous advanced model.</p>
+
+        <h2>Other Stuff</h2>
+        <p>We've got 120k tweets!</p>
+
+        <h2>Attention Mechanism</h2>
+        <p>We have carried out multiple experiments with attention mechanisms in our LSTM classifier.
+        In addition, we started using Tensorboard to visualize the learning.</p>
+
+        <p>Recall that for our advanced attempt I, we implemented an initial attention mechanism that
+        just scratched the surface.
+        It worked by taking the forward LSTM final state, <span class="katex-math">o_\text{fw}</span>,
+        and calculating a weighted average of the input word embeddings <span class="katex-math">v_1, \ldots, v_T</span>.
+        The weight of each <span class="katex-math">v_t</span> was computed by cosine similarity and then normalized.
+        In equations, this basic attention mechanism is:</p>
+        
+        <div class="katex-math">
+            m = o_\text{fw}
+        </div>
+        <div class="katex-math">
+            e_t = \frac
+                {v_t \cdot m}
+                {\|v_t\| \|o_\text{fw}\|}
+            \textit{(cosine similarity)}
+        </div>
+        <div class="katex-math">
+            \alpha_t = \frac{\sigma(e_t)}{\sum_{t'=1}^T{\sigma(e_{t'})}} \textit{(smoothed)}
+        </div>
+        <div class="katex-math">
+            h = \sum_{t'=1}^T{\alpha_t v_t}
+        </div>
+        <div class="katex-math">
+            \hat{y} = softmax(h \mathbf{W_\text{out}} + b_\text{out})
+        </div>
+
+        <p>The paper we referenced for this idea uses sigmoid instead of softmax for the weights
+        <span class="katex-math">\alpha_t</span> because this formulation apparently "smooths" attention
+        across multiple words in the sentence, whereas softmax
+        has the effect of "sharpening" attention to focus on just one word.</p>
+
+        <p>For our second advanced model attempt, we explored additional configurations of the attention mechanism:
+        As input to the attention mechanism, use combinations of <strong>forward and backward</strong> LSTM states,
+        <span class="katex-math">o_\text{fw}</span> and <span class="katex-math">o_\text{bw}</span>:</p>
+
+        <ul>
+            <li>
+                <strong>Concatenation into a dense layer.</strong> Use the same as above, but redefine
+                <div class="katex-math">m = activation \left( [o_\text{fw};\ o_\text{bw}] \mathbf{W_m} + b_m \right)</div>
+            </li>
+            <li>
+                <strong>Element-wise sum.</strong>
+                <div class="katex-math">m = o_\text{fw} + o_\text{bw}</div>
+            </li>
+            <li>
+                <strong>Element-wise product.</strong>
+                <div class="katex-math">m = o_\text{fw} * o_\text{bw}</div>
+            </li>
+            <li>
+                <strong>Bilinear parameterization instead of cosine similarity.</strong>
+                <div class="katex-math">e_t = m \mathbf{W_e} v_t</div>
+            </li>
+        </ul>
+
+        <h3>Visualizing LSTM attention</h3>
+
+        <p><span class="placeholder">Some cool visualizations</span></p>
+
+        <h3>Attention performance</h3>
+        
+        <h4>Attention 1</h4>
+        <p>
+        <span class="katex-math">(o_\text{fw} + o_\text{bw}) \rightarrow \text{cosine similarity}</span>
+        </p>
+        <img src="attn_sum_cos.png">
+        
+        <h4>Attention 2</h4>
+        <p>
+        <span class="katex-math">[o_\text{fw};\ o_\text{bw}] \rightarrow \text{dense} \rightarrow \text{cosine similarity}</span>
+        </p>
+        <img src="attn_concat_cos.png">
+        
+        <h4>Attention 3</h4>
+        <p>
+        <span class="katex-math">(o_\text{fw} + o_\text{bw}) \mathbf{W} v_t \rightarrow \text{cosine similarity}</span>
+        </p>
+        <img src="attn_bilinear.png">
+
+        <h4>No attention</h4>
+        <img src="noattn.png">
+
+        <h3>Conclusion</h3>
+        <p>All of our attempted attention mechanisms were wastes of time because they failed
+        to improve the classifier. We hypothesize that this is because this type of crude
+        attention mechanism effectively forces the model to view the input an averaged bag-of-words.
+        It seems to run counter to the spirit of the LSTM, which is to remember the order of the words.
+        As far as the classifier is concerned,
+        we're exactly where we were two weeks ago.
+        The only improvement we've made in the classifier is the addition of more training tweets.
+        </p>
+
+        <h2>Other Stuff</h2>
+    </div>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script src="/js/applykatex.js"></script>
+</body>
+</html>
