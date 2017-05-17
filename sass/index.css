@@ -1,0 +1,274 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Inconsolata:400,700");
+a {
+  color: #3ba3fc;
+  text-decoration: none;
+  border-bottom: 1px solid #3ba3fc;
+  font-weight: bolder; }
+  a:hover {
+    color: #0068c1;
+    border-color: #0068c1; }
+  a[href^="#"] {
+    font-weight: bolder;
+    color: black;
+    border-color: transparent; }
+    a[href^="#"]:hover {
+      color: #285882; }
+
+code {
+  font-family: "Inconsolata", monospace;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: inline-block;
+  padding: 2px 8px;
+  margin: -2px 4px; }
+
+strong {
+  font-weight: bolder; }
+
+* {
+  box-sizing: border-box;
+  font-family: Roboto; }
+
+body, html {
+  margin: 0;
+  padding: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Nunito;
+  font-weight: 400;
+  margin: 0;
+  position: relative; }
+  h1 .emoji, h2 .emoji, h3 .emoji, h4 .emoji, h5 .emoji, h6 .emoji {
+    position: absolute;
+    left: -1.5em; }
+
+#teamMembers {
+  font-weight: 300; }
+
+p, li {
+  font-weight: 300; }
+
+ul {
+  margin-bottom: 1em; }
+  ul.checklist li {
+    list-style-type: none;
+    margin-left: 1.5em;
+    position: relative; }
+  ul.checklist li::before {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    border-radius: 6px;
+    position: absolute;
+    left: -2rem;
+    top: .2rem;
+    vertical-align: middle; }
+  ul.checklist li.checked::before {
+    content: "✓";
+    font-size: .8em;
+    text-align: center;
+    color: white;
+    border-color: #0068c1;
+    background: #3ba3fc; }
+  ul.checklist li.stretch {
+    color: #8238af; }
+    ul.checklist li.stretch::before {
+      background: #f4e1ff;
+      border-color: #e6c2fb; }
+    ul.checklist li.stretch::after {
+      content: "Stretch Goal 🤞";
+      position: absolute;
+      right: 0;
+      top: 0;
+      transform: translateX(100%);
+      border: 1px solid #8238af;
+      background: #9f56cc;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: .8em;
+      opacity: 0;
+      transition: .2s ease opacity; }
+    ul.checklist li.stretch:hover::after {
+      opacity: 1; }
+
+.placeholder {
+  color: #bbb;
+  font-weight: 300; }
+  .placeholder::before {
+    color: #ddd;
+    content: "<"; }
+  .placeholder::after {
+    color: #ddd;
+    content: ">"; }
+
+li {
+  margin-bottom: 8px; }
+
+#intro {
+  width: 384px;
+  position: fixed;
+  height: 100vh;
+  text-align: right;
+  padding-left: 32px; }
+  #intro h1 {
+    margin-top: 25vh; }
+  #intro h2 {
+    font-weight: 200; }
+  #intro p {
+    max-width: 75%;
+    margin-left: auto; }
+
+main {
+  padding-top: 10vh;
+  margin-left: 416px;
+  padding-left: 32px;
+  max-width: 80%;
+  overflow-y: scroll;
+  height: 100vh;
+  left: 0px;
+  position: relative; }
+  main #posts {
+    position: relative;
+    margin: 0;
+    padding: 0; }
+    main #posts li {
+      font-size: 2rem;
+      font-weight: 100;
+      overflow-y: scroll;
+      padding-left: 3rem;
+      position: relative;
+      line-height: 2em; }
+      main #posts li:first-child h2 {
+        border-top: none; }
+      main #posts li h2 {
+        font-size: 2rem;
+        font-weight: 100;
+        border-top: 1px dotted #eee; }
+      main #posts li a {
+        text-decoration: none; }
+
+.post {
+  width: 40%;
+  min-width: 640px;
+  margin: 0 auto;
+  position: relative; }
+  .post img {
+    max-width: 100%; }
+  .post a.header {
+    display: block;
+    width: 100%;
+    padding-top: 64px;
+    padding-bottom: 32px;
+    font-size: 4em;
+    text-align: center;
+    border: 0; }
+    .post a.header:hover {
+      animation: wiggle .25s ease infinite; }
+@keyframes wiggle {
+  0% {
+    transform: rotate(0deg); }
+  25% {
+    transform: rotate(5deg); }
+  50% {
+    transform: rotate(0deg); }
+  75% {
+    transform: rotate(-5deg); } }
+  .post h1 {
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 16px;
+    font-weight: 100;
+    font-size: 3rem;
+    text-decoration: none;
+    text-align: center; }
+  .post h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    padding-bottom: 12px; }
+  .post h3 {
+    font-size: 1.4rem;
+    font-weight: 300;
+    padding: 8px 0px;
+    border-top: 1px dotted #eee; }
+  .post audio {
+    margin: 1em 0; }
+  .post p, .post li {
+    line-height: 1.6;
+    margin-bottom: 1em; }
+  .post p.footnote {
+    font-size: smaller; }
+  .post .tag {
+    vertical-align: super;
+    font-size: 50%; }
+  .post table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 512px;
+    margin: 16px auto; }
+    .post table th {
+      font-weight: 400;
+      padding: 8px;
+      background: #f9f9f9;
+      border: 1px solid #ddd; }
+    .post table td {
+      text-align: center;
+      font-weight: 300;
+      padding: 8px;
+      border: 1px solid #ddd; }
+  .post ul.classifications {
+    list-style-type: none;
+    padding-left: 2em; }
+    .post ul.classifications li {
+      border-bottom: 1px solid #f9f9f9;
+      padding-bottom: 1em; }
+  .post samp {
+    font-family: "Inconsolata", monospace;
+    border-left: 2px solid #0068c1;
+    background: #3ba3fc;
+    color: white;
+    display: inline-block;
+    padding: 2px 8px; }
+    .post samp::before {
+      content: "> ";
+      opacity: 0.5; }
+  .post blockquote {
+    margin: 0;
+    font-style: italic;
+    text-align: left;
+    padding: 8px;
+    padding-left: 16px;
+    line-height: 1.5;
+    margin-bottom: .5em;
+    border-left: 2px solid #ddd;
+    background: #f9f9f9; }
+
+hr {
+  border: none;
+  border-top: 1px dotted #eee;
+  margin: 32px 0; }
+
+.butterfly {
+  background-image: url("/images/butterfly.png");
+  width: 1em;
+  height: 1em;
+  background-size: contain;
+  display: inline-block; }
+
+.katex {
+  font-size: 1em !important; }
+  .katex * {
+    font-family: inherit; }
+
+div.katex-math {
+  text-align: center;
+  margin: 1em 0; }
+
+.attention {
+  font-family: monospace; }
+
+/*# sourceMappingURL=index.css.map */
