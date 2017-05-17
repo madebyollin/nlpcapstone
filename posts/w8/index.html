@@ -90,7 +90,8 @@
         has the effect of "sharpening" attention to focus on just one word.</p>
 
         <p>For our second advanced model attempt, we explored additional configurations of the attention mechanism:
-        As input to the attention mechanism, use combinations of <strong>forward and backward</strong> LSTM states,
+        As input to the attention mechanism, we tried different combinations of the 
+        <strong>forward and backward</strong> LSTM final states,
         <span class="math-inline">o_\text{fw}</span> and <span class="math-inline">o_\text{bw}</span>:</p>
 
         <ul>
@@ -113,11 +114,24 @@
         </ul>
 
         <h3>Visualizing LSTM attention</h3>
+        <p>After implementing attention in the LSTM, we tried to visualize what words were
+        being focused on. We immediately noticed a couple things: whenever it was present,
+        the "UNK" symbol was receiving significantly more attention than all other words,
+        and that attention was for the most part uniformly distributed among all the words in
+        a sentence. So, we made the change of excluding the "UNK" symbol from attention calculations.
+        This has made the results more interpretable and had no noticeable impact on validation performance.</p>
 
+        <p>Here are some examples of classifications using the attention mechanism. Each token is
+        colored from 0-100% opacity to indicate its relative proportion of attention weight.</p>
+        <div id="attention-key"></div>
         <div class="attention" data-filepath="fake.json"></div>
 
+        <p>From inspecting these and other samples, we notice that the attention mechanism can sometimes
+        have very reasonable output. For example, "" is focused on for ANGER, blah. However, in most cases
+        the words deemed most important are </p>
+
         <h3>Attention performance</h3>
-        
+        <p>Here are graphs of each attention model's validation accuracy during training.</p>
         <h4>Attention 1</h4>
         <p>
         <span class="katex-math">(o_\text{fw} + o_\text{bw}) \rightarrow \text{cosine similarity}</span>
@@ -139,13 +153,13 @@
         <h4>No attention</h4>
         <img src="noattn.png">
 
+
         <h3>Conclusion</h3>
-        <p>All of our attempted attention mechanisms were wastes of time because they failed
+        <p>Sadly, all of our attempted attention mechanisms failed
         to improve the classifier. We hypothesize that this is because this type of crude
-        attention mechanism effectively forces the model to view the input an averaged bag-of-words.
+        attention mechanism effectively forces the model to view the input as an averaged bag-of-words.
         It seems to run counter to the spirit of the LSTM, which is to remember the order of the words.
-        As far as the classifier is concerned,
-        we're exactly where we were two weeks ago.
+        As far as the classifier is concerned, we're exactly where we were two weeks ago.
         The only improvement we've made in the classifier is the addition of more training tweets.
         </p>
 
