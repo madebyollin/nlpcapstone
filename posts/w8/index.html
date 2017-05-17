@@ -70,7 +70,7 @@
         and calculating a weighted average of the input word embeddings <span class="math-inline">v_1, \ldots, v_T</span>.
         The weight of each <span class="math-inline">v_t</span> was computed by cosine similarity and then normalized.
         In equations, this basic attention mechanism is:</p>
-        
+
         <div class="katex-math">
             \begin{aligned}
                 m &= o_\text{fw} \\[1em]
@@ -117,19 +117,19 @@
         <div class="attention" data-filepath="fake.json"></div>
 
         <h3>Attention performance</h3>
-        
+
         <h4>Attention 1</h4>
         <p>
         <span class="katex-math">(o_\text{fw} + o_\text{bw}) \rightarrow \text{cosine similarity}</span>
         </p>
         <img src="attn_sum_cos.png">
-        
+
         <h4>Attention 2</h4>
         <p>
         <span class="katex-math">[o_\text{fw};\ o_\text{bw}] \rightarrow \text{dense} \rightarrow \text{cosine similarity}</span>
         </p>
         <img src="attn_concat_cos.png">
-        
+
         <h4>Attention 3</h4>
         <p>
         <span class="katex-math">(o_\text{fw} + o_\text{bw}) \mathbf{W} v_t \rightarrow \text{cosine similarity}</span>
@@ -149,7 +149,25 @@
         The only improvement we've made in the classifier is the addition of more training tweets.
         </p>
 
-        <h2>Other Stuff</h2>
+        <h2>Text to Speech</h2>
+        <p>In a culmination of our previous efforts towards creating a system to decompose spoken audio for proper emotion transfer, we've combined the time-frequency autoencoder (week 7) with an adversarial loss (week 6) in the hope of generating sharp speech samples.</p>
+        <p>The model consists of a <strong>generator</strong> which receives as input a <strong>time</strong> reference and a <strong>frequency</strong> reference signal, and attempts to generate a plausible combination of the two, and a <strong>discriminator</strong> which recieves as input a speech signal, and attempts to determine if it is real or generated.</p>
+        <p>Evaluating GAN quality is somewhat trickier than evaluating standard ML models; we can look at the loss functions for the generator and discriminator over time:</p>
+
+        <div class="placeholder">loss plot</div>
+
+        <p>However, the progression of these loss functions doesn't tell us much about the metric we actually care about (sample quality).  To get a clearer picture, we can check the actual samples which the model produces on some of the training data:</p>
+
+        <div class="placeholder">samples</div>
+
+        <p>
+            Unfortunately, these samples are very poor, suggesting that a better architecture is needed.  Some directions to explore:
+        </p>
+        <ul>
+            <li><strong>Improved GAN:</strong> There are several techniques used to improve the stability of GANs and allow them to generate larger samples.  In particular, carrying over most of the architecturual choices (apart from the initial input to the generator) from <a href="https://arxiv.org/pdf/1611.07004v1.pdf">Pix2Pix</a> (rather than trying to build it from scratch) will likely give better performance.</li>
+            <li><strong>VAE:</strong> Using a variational autoencoder is another possible method for developing a reasonable generative model over image data, with its own bag of tricks.</li>
+            <li><strong>Neural + Patches:</strong> The <a href="https://arxiv.org/pdf/1705.01088.pdf">most impressive results in image to image translation recently</a> have come from patch-based, algorithmic methods with a neural feature-analysis component rather than fully neural architectures.  If we can build a neural feature analysis component for voice, then we can potentially combine this with our earlier patch matching experiments to give better results.</li>
+        </ul>
     </div>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="/js/applykatex.js"></script>
