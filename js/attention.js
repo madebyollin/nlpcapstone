@@ -34,16 +34,14 @@
     var attentions = document.querySelectorAll(".attention");
     for (let parent of attentions) {
         request(parent.dataset.filepath, obj => {
-            let bq = document.createElement("blockquote");
             for (let k = 0; k < obj.words.length; k++) {
                 let span = document.createElement("span");
                 span.textContent = obj.words[k];
                 span.style.backgroundColor = rgba(colors[obj.pred_label], obj.attention[k]);
                 span.className = "token";
-                bq.appendChild(span);
-                bq.appendChild(document.createTextNode(" "));
+                parent.appendChild(span);
+                parent.appendChild(document.createTextNode(" "));
             }
-            parent.appendChild(bq);
         });
     }
 }());

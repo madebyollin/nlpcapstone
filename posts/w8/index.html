@@ -74,17 +74,19 @@
         <div class="katex-math">
             \begin{aligned}
                 m &= o_\text{fw} \\[1em]
-                e_t &= \frac
+                \forall 1 \leq t \leq T \quad e_t &= \frac
                         {v_t \cdot m}
-                        {\|v_t\| \|o_\text{fw}\|}
+                        {\|v_t\| \|m\|}
                     \pod\text{cosine similarity} \\[1em]
-                \alpha_t &= \frac{\sigma(e_t)}{\sum_{t'=1}^T{\sigma(e_{t'})}}  \pod\text{smoothed} \\[1em]
-                h &= \sum_{t'=1}^T{\alpha_t v_t} \\[1em]
-                \hat{y} &= softmax(h \mathbf{W_\text{out}} + b_\text{out})
+                \forall 1 \leq t \leq T \quad \alpha_t &= \frac{\sigma(e_t)}{\sum_{t'=1}^T{\sigma(e_{t'})}}
+                    \pod\text{smoothed and normalized} \\[1em]
+                h &= \sum_{t=1}^T{\alpha_t v_t}
+                    \pod\text{weighted average} \\[1em]
+                \hat{y} &= \text{softmax}(h \mathbf{W_\text{out}} + b_\text{out})
             \end{aligned}
         </div>
 
-        <p>The paper we referenced for this idea uses sigmoid instead of softmax for the weights
+        <p>The paper we referenced for this idea uses a sigmoid "smoothmax" instead of softmax for the weights
         <span class="math-inline">\alpha_t</span> because this formulation apparently "smooths" attention
         across multiple words in the sentence, whereas softmax
         has the effect of "sharpening" attention to focus on just one word.</p>
@@ -96,77 +98,80 @@
 
         <ul>
             <li>
-                <strong>Concatenation into a dense layer.</strong> Use the same as above, but redefine
-                <div class="math-inline">m = activation \left( [o_\text{fw};\ o_\text{bw}] \mathbf{W_m} + b_m \right)</div>
+                <strong>Element-wise sum or product:</strong>
+                Redefine <span class="math-inline">m = o_\text{fw} + o_\text{bw}</span>
+                or <span class="math-inline">m = o_\text{fw} * o_\text{bw}</span>.
             </li>
             <li>
-                <strong>Element-wise sum.</strong>
-                <div class="math-inline">m = o_\text{fw} + o_\text{bw}</div>
+                <strong>Concatenation into a dense layer:</strong>
+                Redefine
+                <span class="math-inline">m = \text{activation}([o_\text{fw};\ o_\text{bw}] \mathbf{W_m} + b_m)</span>.
             </li>
             <li>
-                <strong>Element-wise product.</strong>
-                <div class="math-inline">m = o_\text{fw} * o_\text{bw}</div>
-            </li>
-            <li>
-                <strong>Bilinear parameterization instead of cosine similarity.</strong>
-                <div class="math-inline">e_t = m \mathbf{W_e} v_t</div>
+                <strong>Bilinear parameterization instead of cosine similarity:</strong>
+                Redefine <span class="math-inline">m</span> as some combination of
+                <span class="math-inline">o_\text{fw}, o_\text{bw}</span> and redefine
+                <span class="math-inline">e_t = m \mathbf{W_e} v_t</span>.
             </li>
         </ul>
 
+        <h3>Attention performance</h3>
+        <p>Here are graphs of each attention model's validation accuracy during training with
+        number of gradient updates on the time axis. These sessions were conducted with 94.5k training tweets.</p>
+        <p>Attention 1:
+        <span class="math-inline">(o_\text{fw} + o_\text{bw}) \rightarrow \text{cosine similarity}</span>
+        </p>
+        <p>Peak accuracy: 60.2%</p>
+        <img src="attn_sum_cos.png">
+
+        <p>Attention 2:
+        <span class="math-inline">\text{activation}([o_\text{fw};\ o_\text{bw}]\mathbf{W_m} + b_m) \rightarrow \text{cosine similarity}</span>
+        </p>
+        <p>Peak accuracy: 60.3%</p>
+        <img src="attn_concat_cos.png">
+
+        <p>Attention 3:
+        <span class="math-inline">(o_\text{fw} + o_\text{bw}) \mathbf{W_e} v_t \rightarrow \text{cosine similarity}</span>
+        </p>
+        <p>Peak accuracy: 59.3%</p>
+        <img src="attn_bilinear.png">
+
+        <p><strong>No attention:</strong></p>
+        <p><strong>Peak accuracy: 61.4%</strong></p>
+        <img src="noattn.png">
+
         <h3>Visualizing LSTM attention</h3>
         <p>After implementing attention in the LSTM, we tried to visualize what words were
-        being focused on. We immediately noticed a couple things: whenever it was present,
-        the "UNK" symbol was receiving significantly more attention than all other words,
-        and that attention was for the most part uniformly distributed among all the words in
-        a sentence. So, we made the change of excluding the "UNK" symbol from attention calculations.
-        This has made the results more interpretable and had no noticeable impact on validation performance.</p>
+        being focused on. We immediately noticed a couple things: whenever present,
+        the "UNK" symbol was receiving significantly more attention than all other words;
+        and for the most part, attention was uniformly distributed among all the words in
+        a sentence. So, we made two changes: we excluded the "UNK" symbol from attention calculations
+        and used a softmax instead of "smoothmax" function.
+        As a result, we are seeing much more interpretable results, and there has been 
+        no noticeable impact on validation performance.</p>
 
-        <p>Here are 12 randomly selected samples of classifications using the attention mechanism. Each color
-        corresponds to one class, and each token is colored from 0-100% opacity to indicate its
+        <p>Here are 12 randomly selected samples of classifications using <strong>Attention 3</strong>, the bilinear parameterized
+        model. Each color corresponds to the model's predicted class, and each token is colored from 0-100% opacity to indicate its
         proportion of attention weight.</p>
 
         <div><strong>Key: </strong> <span id="attention-key"></span></div>
 
         <ol>
-            <li>
-                <div class="attention" data-filepath="samp1.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp2.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp3.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp4.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp5.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp6.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp7.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp8.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp9.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp10.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp11.json"></div>
-            </li>
-            <li>
-                <div class="attention" data-filepath="samp12.json"></div>
-            </li>
+            <li> <div class="attention" data-filepath="samp1.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp2.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp3.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp4.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp5.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp6.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp7.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp8.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp9.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp10.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp11.json"></div> </li>
+            <li> <div class="attention" data-filepath="samp12.json"></div> </li>
         </ol>
 
-        <p>From inspecting these and other samples, we notice that the attention mechanism is sometimes
+        <p>From inspecting these samples, we notice that the attention mechanism is
         reasonably effective at focusing on emotionally-relevant words. For example, "disgusting", "angry", "lmao",
         "alone", "fun", "bullying", and "dirty capitalism" all receive focus.
         In many cases the words deemed most important are not necessarily emotionally relevant, such as
@@ -174,41 +179,13 @@
         still struggles with sarcasm.
         </p>
 
-        <h3>Attention performance</h3>
-        <p>Here are graphs of each attention model's validation accuracy during training. These sessions
-        were conducted with 94.5k training tweets.</p>
-        <h4>Attention 1</h4>
-        <p>
-        <span class="math-display">(o_\text{fw} + o_\text{bw}) \rightarrow \text{cosine similarity}</span>
-        </p>
-        <p>Peak accuracy: 60.2%</p>
-        <img src="attn_sum_cos.png">
-
-        <h4>Attention 2</h4>
-        <p>
-        <span class="math-display">[o_\text{fw};\ o_\text{bw}] \rightarrow \text{dense} \rightarrow \text{cosine similarity}</span>
-        </p>
-        <p>Peak accuracy: 60.3%</p>
-        <img src="attn_concat_cos.png">
-
-        <h4>Attention 3</h4>
-        <p>
-        <span class="math-display">(o_\text{fw} + o_\text{bw}) \mathbf{W} v_t \rightarrow \text{cosine similarity}</span>
-        </p>
-        <p>Peak accuracy: 59.3%</p>
-        <img src="attn_bilinear.png">
-
-        <h4>No attention</h4>
-        <p><strong>Peak accuracy: 61.4%</strong></p>
-        <img src="noattn.png">
-
         <h3>Conclusion</h3>
         <p>Sadly, all of our attempted attention mechanisms decreased the validation
         accuracy of the classifier. We hypothesize that this is because these
         attention mechanisms effectively force the model to view the input as an averaged bag-of-words,
         which is less powerful than using the LSTM output directly.
-        However, from inpsection, the output is surprisingly sensible and makes the model's classifications
-        pleasingly interpretable, even if they often disagree with the "silver labels" provided by the emoji.
+        However, from further inspection, the output is surprisingly sensible and makes the model's classifications
+        pleasantly interpretable, even if they often disagree with the "silver labels" provided by the emoji.
         </p>
 
         <h2>Text to Speech</h2>
