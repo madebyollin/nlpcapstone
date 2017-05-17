@@ -19,16 +19,15 @@
     }
 
     var key = document.getElementById("attention-key");
-    let i = 0;
-    for (let colorName in colors) {
-        let label = document.createElement("span")
-        label.textContent = colorName;
-        label.style.backgroundColor = rgba(colors[colorName], 1.0);
+    var colorNames = Object.keys(colors);
+    for (let i = 0; i < colorNames.length; i++) {
+        let label = document.createElement("span");
+        label.textContent = colorNames[i];
+        label.style.backgroundColor = rgba(colors[colorNames[i]], 1.0);
         if (i > 0) {
             key.appendChild(document.createTextNode(" / "));
         }
         key.appendChild(label);
-        i++;
     }
 
     var attentions = document.querySelectorAll(".attention");
