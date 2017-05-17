@@ -20,8 +20,39 @@
         <h1>Advanced Model Attempt II</h1>
         <p>We present an advanced model that builds upon our previous advanced model.</p>
 
-        <h2>Other Stuff</h2>
-        <p>We've got 120k tweets!</p>
+        <h2>Pre-processing</h2>
+        <p>
+            Our corpus is now at 135k tweets! Our tagging scheme remains
+            unchanged, but we've moved on to looking into different ways of
+            processing our data, starting with different tokenizing engines:
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tokenizer</th>
+                    <th>Token count</th>
+                    <th>Vocabulary size</th>
+                    <th>OOV&nbsp;rate (wrt.&nbsp;GloVe)</th>
+                    <th>Validation accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="http://www.nltk.org/api/nltk.tokenize.html#nltk.tokenize.casual.TweetTokenizer">NLTK&nbsp;TweetTokenizer</a></td>
+                    <td>2207891</td>
+                    <td>164370</td>
+                    <td>21.55%</td>
+                    <td>0.5967</td>
+                </tr>
+                <tr>
+                    <td><a href="https://nlp.stanford.edu/projects/glove/preprocess-twitter.rb">GloVe script</a></td>
+                    <td>TODO</td>
+                    <td>TODO</td>
+                    <td>TODO</td>
+                    <td>TODO</td>
+                </tr>
+            </tbody>
+        </table>
 
         <h2>Attention Mechanism</h2>
         <p>We have carried out multiple experiments with attention mechanisms in our LSTM classifier.
