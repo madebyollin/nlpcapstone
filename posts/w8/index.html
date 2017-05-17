@@ -46,9 +46,9 @@
                 </tr>
                 <tr>
                     <td><a href="https://nlp.stanford.edu/projects/glove/preprocess-twitter.rb">GloVe script</a> *</td>
-                    <td>TODO</td>
-                    <td>TODO</td>
-                    <td>TODO</td>
+                    <td>2435201</td>
+                    <td>115380</td>
+                    <td>29.89%</td>
                     <td>--</td>
                 </tr>
             </tbody>
@@ -70,7 +70,7 @@
         and calculating a weighted average of the input word embeddings <span class="math-inline">v_1, \ldots, v_T</span>.
         The weight of each <span class="math-inline">v_t</span> was computed by cosine similarity and then normalized.
         In equations, this basic attention mechanism is:</p>
-        
+
         <div class="katex-math">
             \begin{aligned}
                 m &= o_\text{fw} \\[1em]
@@ -97,19 +97,19 @@
         <ul>
             <li>
                 <strong>Concatenation into a dense layer.</strong> Use the same as above, but redefine
-                <div class="katex-math">m = activation \left( [o_\text{fw};\ o_\text{bw}] \mathbf{W_m} + b_m \right)</div>
+                <div class="math-inline">m = activation \left( [o_\text{fw};\ o_\text{bw}] \mathbf{W_m} + b_m \right)</div>
             </li>
             <li>
                 <strong>Element-wise sum.</strong>
-                <div class="katex-math">m = o_\text{fw} + o_\text{bw}</div>
+                <div class="math-inline">m = o_\text{fw} + o_\text{bw}</div>
             </li>
             <li>
                 <strong>Element-wise product.</strong>
-                <div class="katex-math">m = o_\text{fw} * o_\text{bw}</div>
+                <div class="math-inline">m = o_\text{fw} * o_\text{bw}</div>
             </li>
             <li>
                 <strong>Bilinear parameterization instead of cosine similarity.</strong>
-                <div class="katex-math">e_t = m \mathbf{W_e} v_t</div>
+                <div class="math-inline">e_t = m \mathbf{W_e} v_t</div>
             </li>
         </ul>
 
@@ -121,49 +121,115 @@
         a sentence. So, we made the change of excluding the "UNK" symbol from attention calculations.
         This has made the results more interpretable and had no noticeable impact on validation performance.</p>
 
-        <p>Here are some examples of classifications using the attention mechanism. Each token is
-        colored from 0-100% opacity to indicate its relative proportion of attention weight.</p>
-        <div id="attention-key"></div>
-        <div class="attention" data-filepath="fake.json"></div>
+        <p>Here are 12 randomly selected samples of classifications using the attention mechanism. Each color
+        corresponds to one class, and each token is colored from 0-100% opacity to indicate its
+        proportion of attention weight.</p>
 
-        <p>From inspecting these and other samples, we notice that the attention mechanism can sometimes
-        have very reasonable output. For example, "" is focused on for ANGER, blah. However, in most cases
-        the words deemed most important are </p>
+        <div><strong>Key: </strong> <span id="attention-key"></span></div>
+
+        <ol>
+            <li>
+                <div class="attention" data-filepath="samp1.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp2.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp3.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp4.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp5.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp6.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp7.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp8.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp9.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp10.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp11.json"></div>
+            </li>
+            <li>
+                <div class="attention" data-filepath="samp12.json"></div>
+            </li>
+        </ol>
+
+        <p>From inspecting these and other samples, we notice that the attention mechanism is sometimes
+        reasonably effective at focusing on emotionally-relevant words. For example, "disgusting", "angry", "lmao",
+        "alone", "fun", "bullying", and "dirty capitalism" all receive focus.
+        In many cases the words deemed most important are not necessarily emotionally relevant, such as
+        "we", but still the classification is reasonable. And, as seen in sample 6, the model
+        still struggles with sarcasm.
+        </p>
 
         <h3>Attention performance</h3>
-        <p>Here are graphs of each attention model's validation accuracy during training.</p>
+        <p>Here are graphs of each attention model's validation accuracy during training. These sessions
+        were conducted with 94.5k training tweets.</p>
         <h4>Attention 1</h4>
         <p>
-        <span class="katex-math">(o_\text{fw} + o_\text{bw}) \rightarrow \text{cosine similarity}</span>
+        <span class="math-display">(o_\text{fw} + o_\text{bw}) \rightarrow \text{cosine similarity}</span>
         </p>
+        <p>Peak accuracy: 60.2%</p>
         <img src="attn_sum_cos.png">
-        
+
         <h4>Attention 2</h4>
         <p>
-        <span class="katex-math">[o_\text{fw};\ o_\text{bw}] \rightarrow \text{dense} \rightarrow \text{cosine similarity}</span>
+        <span class="math-display">[o_\text{fw};\ o_\text{bw}] \rightarrow \text{dense} \rightarrow \text{cosine similarity}</span>
         </p>
+        <p>Peak accuracy: 60.3%</p>
         <img src="attn_concat_cos.png">
-        
+
         <h4>Attention 3</h4>
         <p>
-        <span class="katex-math">(o_\text{fw} + o_\text{bw}) \mathbf{W} v_t \rightarrow \text{cosine similarity}</span>
+        <span class="math-display">(o_\text{fw} + o_\text{bw}) \mathbf{W} v_t \rightarrow \text{cosine similarity}</span>
         </p>
+        <p>Peak accuracy: 59.3%</p>
         <img src="attn_bilinear.png">
 
         <h4>No attention</h4>
+        <p><strong>Peak accuracy: 61.4%</strong></p>
         <img src="noattn.png">
 
-
         <h3>Conclusion</h3>
-        <p>Sadly, all of our attempted attention mechanisms failed
-        to improve the classifier. We hypothesize that this is because this type of crude
-        attention mechanism effectively forces the model to view the input as an averaged bag-of-words.
-        It seems to run counter to the spirit of the LSTM, which is to remember the order of the words.
-        As far as the classifier is concerned, we're exactly where we were two weeks ago.
-        The only improvement we've made in the classifier is the addition of more training tweets.
+        <p>Sadly, all of our attempted attention mechanisms decreased the validation
+        accuracy of the classifier. We hypothesize that this is because these
+        attention mechanisms effectively force the model to view the input as an averaged bag-of-words,
+        which is less powerful than using the LSTM output directly.
+        However, from inpsection, the output is surprisingly sensible and makes the model's classifications
+        pleasingly interpretable, even if they often disagree with the "silver labels" provided by the emoji.
         </p>
 
-        <h2>Other Stuff</h2>
+        <h2>Text to Speech</h2>
+        <p>In a culmination of our previous efforts towards creating a system to decompose spoken audio for proper emotion transfer, we've combined the time-frequency autoencoder (week 7) with an adversarial loss (week 6) in the hope of generating sharp speech samples.</p>
+        <p>The model consists of a <strong>generator</strong> which receives as input a <strong>time</strong> reference and a <strong>frequency</strong> reference signal, and attempts to generate a plausible combination of the two, and a <strong>discriminator</strong> which recieves as input a speech signal, and attempts to determine if it is real or generated.</p>
+        <p>Evaluating GAN quality is somewhat trickier than evaluating standard ML models; we can look at the loss functions for the generator and discriminator over time:</p>
+
+        <div class="placeholder">loss plot</div>
+
+        <p>However, the progression of these loss functions doesn't tell us much about the metric we actually care about (sample quality).  To get a clearer picture, we can check the actual samples which the model produces on some of the training data:</p>
+
+        <div class="placeholder">samples</div>
+
+        <p>
+            Unfortunately, these samples are very poor, suggesting that a better architecture is needed.  Some directions to explore:
+        </p>
+        <ul>
+            <li><strong>Improved GAN:</strong> There are several techniques used to improve the stability of GANs and allow them to generate larger samples.  In particular, carrying over most of the architecturual choices (apart from the initial input to the generator) from <a href="https://arxiv.org/pdf/1611.07004v1.pdf">Pix2Pix</a> (rather than trying to build it from scratch) will likely give better performance.</li>
+            <li><strong>VAE:</strong> Using a variational autoencoder is another possible method for developing a reasonable generative model over image data, with its own bag of tricks.</li>
+            <li><strong>Neural + Patches:</strong> The <a href="https://arxiv.org/pdf/1705.01088.pdf">most impressive results in image to image translation recently</a> have come from patch-based, algorithmic methods with a neural feature-analysis component rather than fully neural architectures.  If we can build a neural feature analysis component for voice, then we can potentially combine this with our earlier patch matching experiments to give better results.</li>
+        </ul>
     </div>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="/js/applykatex.js"></script>

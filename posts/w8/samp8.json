@@ -1,0 +1,1 @@
+{"pred_label": "SADNESS", "words": ["[UNK]", "[UNK]", "[UNK]", "[UNK]", "me", "haces", "bullying"], "true_label": "SADNESS", "attention": [0.0, 0.0, 0.0, 0.0, 0.23384393751621246, 0.32927483320236206, 0.43688127398490906]}

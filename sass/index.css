@@ -38,6 +38,7 @@ body, html {
 h1, h2, h3, h4, h5, h6 {
   font-family: Nunito;
   font-weight: 400;
+  color: black;
   margin: 0;
   position: relative; }
   h1 .emoji, h2 .emoji, h3 .emoji, h4 .emoji, h5 .emoji, h6 .emoji {
@@ -267,8 +268,5 @@ hr {
 div.katex-math {
   text-align: center;
   margin: 1em 0; }
-
-.attention {
-  font-family: monospace; }
 
 /*# sourceMappingURL=index.css.map */

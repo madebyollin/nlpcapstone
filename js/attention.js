@@ -1,13 +1,11 @@
 (function() {
+    "use strict";
+
     function request(url, callback) {
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                callback(JSON.parse(xhr.responseText));
-            }
-        }
-        xhr.open("GET", url, true);
-        xhr.send(null);
+        xhr.onload = e => callback(JSON.parse(xhr.response));
+        xhr.open("GET", url);
+        xhr.send();
     }
 
     var colors = {
@@ -20,21 +18,32 @@
         return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
     }
 
-    var nodes = document.querySelectorAll(".attention");
-    for (let i = 0; i < nodes.length; i++) {
-        let node = nodes[i];
-        request(node.dataset.filepath, obj => {
-            let max = Math.max(...obj.attention);
-            let min = Math.min(...obj.attention);
-            let rng = max - min;
+    var key = document.getElementById("attention-key");
+    let i = 0;
+    for (let colorName in colors) {
+        let label = document.createElement("span")
+        label.textContent = colorName;
+        label.style.backgroundColor = rgba(colors[colorName], 1.0);
+        if (i > 0) {
+            key.appendChild(document.createTextNode(" / "));
+        }
+        key.appendChild(label);
+        i++;
+    }
+
+    var attentions = document.querySelectorAll(".attention");
+    for (let parent of attentions) {
+        request(parent.dataset.filepath, obj => {
+            let bq = document.createElement("blockquote");
             for (let k = 0; k < obj.words.length; k++) {
                 let span = document.createElement("span");
                 span.textContent = obj.words[k];
-                span.style.backgroundColor = rgba(colors[obj.pred_label], (obj.attention[k] - min) / (rng));
-                span.style.padding = "2px";
-                node.appendChild(span);
-                node.appendChild(document.createTextNode(" "));
+                span.style.backgroundColor = rgba(colors[obj.pred_label], obj.attention[k]);
+                span.className = "token";
+                bq.appendChild(span);
+                bq.appendChild(document.createTextNode(" "));
             }
+            parent.appendChild(bq);
         });
     }
 }());
