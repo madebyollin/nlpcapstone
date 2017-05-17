@@ -269,4 +269,10 @@ div.katex-math {
   text-align: center;
   margin: 1em 0; }
 
+.attention {
+  padding: 2px 8px; }
+
+.attention span {
+  font-family: "Inconsolata", monospace; }
+
 /*# sourceMappingURL=index.css.map */

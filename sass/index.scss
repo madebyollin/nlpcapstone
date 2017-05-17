@@ -15,6 +15,9 @@ $lpurpledk: #e6c2fb;
 $purpledk: #8238af;
 $purple: #9f56cc;
 
+// fonts
+$code: "Inconsolata", monospace;
+
 a {
     color: $blue;
     text-decoration: none;
@@ -36,7 +39,7 @@ a {
 }
 
 code {
-    font-family: "Inconsolata", monospace;
+    font-family: $code;
     background: $lgrey;
     border: 1px solid $lgreydk;
     border-radius: $radius;
@@ -315,7 +318,7 @@ main {
     }
 
     samp {
-        font-family: "Inconsolata", monospace;
+        font-family: $code;
         border-left: 2px solid $bluedk;
         background: $blue;
         color: white;
@@ -367,5 +370,9 @@ div.katex-math {
 }
 
 .attention {
-    font-family: monospace;
+    padding: 2px 8px;
+}
+
+.attention span {
+    font-family: $code;
 }
