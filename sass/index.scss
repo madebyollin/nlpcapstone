@@ -54,14 +54,13 @@ strong {
 
 * {
     box-sizing: border-box;
-    font-family: Roboto;
 }
 
-body, html {
+body {
     margin: 0;
     padding: 0;
+    font-family: Roboto;
 }
-
 
 h1, h2, h3, h4, h5, h6 {
     font-family: Nunito;
@@ -81,7 +80,6 @@ h1, h2, h3, h4, h5, h6 {
 
 p, li {
     font-weight: 300;
-
 }
 
 ul {
@@ -367,4 +365,9 @@ hr {
 div.katex-math {
     text-align: center;
     margin: 1em 0;
+}
+
+.attention {
+    padding: 2px 8px;
+    font-family: $code;
 }

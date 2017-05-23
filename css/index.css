@@ -28,12 +28,12 @@ strong {
   font-weight: bolder; }
 
 * {
-  box-sizing: border-box;
-  font-family: Roboto; }
+  box-sizing: border-box; }
 
-body, html {
+body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-family: Roboto; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: Nunito;
@@ -270,9 +270,7 @@ div.katex-math {
   margin: 1em 0; }
 
 .attention {
-  padding: 2px 8px; }
-
-.attention span {
+  padding: 2px 8px;
   font-family: "Inconsolata", monospace; }
 
 /*# sourceMappingURL=index.css.map */
