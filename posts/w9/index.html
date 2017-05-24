@@ -93,13 +93,16 @@
         <h3>Attention</h3>
 
         <p>Previously, our attention mechanism targeted the input word embeddings.
-        We've changed it to target the LSTM's hidden states in the hope that this may
+        We noticed that the model had trouble classifying sentences with modifiers
+        and negations, e.g. "this is f***ing great" was very confidently an "angry" phrase
+        solely because of the profanity. We realized that attention on input embeddings effectively
+        flattens the sentence into a weighted bag of words, which might be a cause of this.
+        We've changed the attention mechanism to target the LSTM's hidden states in the hope that this may
         allow the model to capture the history and compositional
-        meaning of words in a sentence. We realized that attention on
-        input embeddings effectively flattens the sentence into a weighted bag of words.</p>
+        meaning of words.</p>
         
         <p>To do this, we give each time step a score by a parameterized matrix multiplication between the
-        LSTM outputs at that time time step with the LSTM outputs at the final time step.
+        LSTM outputs at that time step with the LSTM outputs at the final time step.
         At every time step, we concatenate the forward and backward LSTM outputs into a doubly-long vector.
         Then, we normalize the scores and then "summarize" the entire sequence with a weighted average
         of the concatenated LSTM outputs. This summary goes in to a fully-connected layer
@@ -136,6 +139,11 @@
             despite changing the tokenization method and attention mechanism.
             This led us to realize that we don't have a good idea of what
             "optimal" performance on this dataset might look like.</li>
+
+            <li><strong>Perform a more thorough hyperparameter search.</strong>
+            We arbitrarily chose an LSTM hidden state size of 200. We haven't messed with
+            the Adam optimizer's learning rate or epsilon. It would be nice to see how
+            changing these parameters affects the model.</li>
         </ul>
 
         <h2>Text to Speech</h2>
