@@ -24,12 +24,12 @@
 
         <p>We have <strong>195k tweets!</strong></p>
 
-        <p>This week, we started using a different tokenization scheme.
+        <p>This week, we explored different tokenization schemes.
         We discovered that we were using a tokenizer that
-        essentially split only on whitespace and punctuation, wheras the GloVe vocabulary
-        was tokenized with rules such as splitting <code>"you're"</code> into <code>["you", "'re"]</code>
-        and translating <code>"OMG"</code> into <code>["omg", "&lt;allcaps&gt;"]</code>. This change alone
-        reduced the GloVe LSTM's training OOV rate from ~11% to ~7%.</p>
+        essentially split only on whitespace and punctuation, whereas the GloVe vocabulary
+        was tokenized with rules such as splitting <code>["you're", "don't"]</code> into
+        <code>["you", "'re", "do", "n't"]</code>. This change alone
+        reduces the GloVe LSTM's training OOV rate from ~11% to ~7%.</p>
 
         <h2>Classifier</h2>
 
