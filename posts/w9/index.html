@@ -105,9 +105,21 @@
         of the concatenated LSTM outputs. This summary goes in to a fully-connected layer
         and softmax to create classifications.</p>
 
-        <p>Here is how the new model is doing with some of the same sentences we used in our last post:</p>
+        <p>The validation accuracy of this type of attention is roughly the same as the previous one.
+        From inspecting some example inputs, it's not clear if changing the attention has helped or not:</p>
 
-        <p><span class="placeholder"></span></p>
+        <div id="attention-key"></div>
+        <ul>
+            <li><div class="attention" data-filepath="rainy1.json"></div></li>
+            <li><div class="attention" data-filepath="rainy2.json"></div></li>
+            <li><div class="attention" data-filepath="great1.json"></div></li>
+            <li><div class="attention" data-filepath="great2.json"></div></li>
+            <li><div class="attention" data-filepath="parcel.json"></div></li>
+            <li><div class="attention" data-filepath="lunch.json"></div></li>
+        </ul>
+
+        <p>The attention mechanism is still easily deceived by negations and syntactic words that
+        change the meaning but don't inherently carry emotional baggage.</p>
 
         <h3>Odds and Ends</h3>
 
@@ -125,17 +137,12 @@
             This led us to realize that we don't have a good idea of what
             "optimal" performance on this dataset might look like.</li>
         </ul>
-        <p>Furthermore, we'd like to clean up our classifier in a few ways:</p>
-        <ul>
-            <li>The GloVe Twitter embeddings contain a lot of non-English words.
-            Since we are only training on English tweets, we can save a lot of space
-            by trimming the GloVe embeddings of all the non-English words.</li>
-        </ul>
 
         <h2>Text to Speech</h2>
         
     </div>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="/js/applykatex.js"></script>
+    <script src="/js/attention.js"></script>
 </body>
 </html>
