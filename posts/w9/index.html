@@ -20,9 +20,62 @@
         <h1>Advanced Model Attempt II (Continued)</h1>
         <p>We present an advanced model that builds upon our <a href="/posts/w6/">previous</a> <a href="/posts/w7/">advanced model</a>.</p>
 
-        <h2>Data Processing</h2>
+        <h2>Data Collection and Processing</h2>
+
+        <p>We have <strong>195k tweets!</strong></p>
+
+        <p>This week, we started using a different tokenization scheme.
+        We discovered that we were using a tokenizer that
+        essentially split only on whitespace and punctuation, wheras the GloVe vocabulary
+        was tokenized with rules such as splitting <code>"you're"</code> into <code>["you", "'re"]</code>
+        and translating <code>"OMG"</code> into <code>["omg", "&lt;allcaps&gt;"]</code>. This change alone
+        reduced the GloVe LSTM's training OOV rate from ~11% to ~7%.</p>
 
         <h2>Classifier</h2>
+
+        <p>This week, we've experimented with attention on hidden states (instead of word embeddings),
+        re-trained with more tweets and better tokenization,
+        and cleaned up our classifier code to pay off technical debt.</p>
+
+        <h3>Attention</h3>
+
+        <p>Previously, our attention mechanism targeted the input word embeddings.
+        We've changed it to target the LSTM's hidden states in the hope that this may
+        allow the model to capture the history and compositional
+        meaning of words in a sentence. We realized that attention on
+        input embeddings effectively flattens the sentence into a weighted bag of words.</p>
+        
+        <p>To do this, we give each time step a score by a parameterized matrix multiplication between the
+        LSTM outputs at that time time step with the LSTM outputs at the final time step.
+        At every time step, we concatenate the forward and backward LSTM outputs into a doubly-long vector.
+        Then, we normalize the scores and then "summarize" the entire sequence with a weighted average
+        of the concatenated LSTM outputs. This summary goes in to a fully-connected layer
+        and softmax to create classifications.</p>
+
+        <p>Here we compare attention on the hidden states versus on the input embeddings:</p>
+
+        <p><span class="placeholder"></span></p>
+
+        <h3>Odds and Ends</h3>
+
+
+        <p>Our end-game plan for the classifier is to run tests to convince ourselves that our advanced
+        model actually is learning what we think it's learning. Specifically:</p>
+        <ul>
+            <li>Compare it to a model that just takes an average of the input word embeddings, and
+            feeds this into a dense layer. This could give us evidence that the LSTM
+            is actually doing something, as opposed to making the embedding layer
+            do all the work.</li>
+            
+            <li>Compare our models to human performance on the same task.</li>
+        </ul>
+        <p>Furthermore, we'd like to clean up our classifier in a few ways:</p>
+        <ul>
+            <p>The GloVe Twitter embeddings contain a lot of non-English words.
+            Since we are only training on English tweets, we can save a lot of space
+            by trimming the GloVe embeddings of all the non-English words.</p>
+            <p>Use</p>
+        </ul>
 
         <h2>Text to Speech</h2>
         
