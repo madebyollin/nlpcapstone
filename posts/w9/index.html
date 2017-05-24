@@ -52,7 +52,7 @@
         of the concatenated LSTM outputs. This summary goes in to a fully-connected layer
         and softmax to create classifications.</p>
 
-        <p>Here we compare attention on the hidden states versus on the input embeddings:</p>
+        <p>Here is how the new model is doing with some of the same sentences we used in our last post:</p>
 
         <p><span class="placeholder"></span></p>
 
@@ -71,10 +71,9 @@
         </ul>
         <p>Furthermore, we'd like to clean up our classifier in a few ways:</p>
         <ul>
-            <p>The GloVe Twitter embeddings contain a lot of non-English words.
+            <li>The GloVe Twitter embeddings contain a lot of non-English words.
             Since we are only training on English tweets, we can save a lot of space
-            by trimming the GloVe embeddings of all the non-English words.</p>
-            <p>Use</p>
+            by trimming the GloVe embeddings of all the non-English words.</li>
         </ul>
 
         <h2>Text to Speech</h2>
