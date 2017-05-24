@@ -21,15 +21,68 @@
         <p>We present an advanced model that builds upon our <a href="/posts/w6/">previous</a> <a href="/posts/w7/">advanced model</a>.</p>
 
         <h2>Data Collection and Processing</h2>
-
-        <p>We have <strong>195k tweets!</strong></p>
-
-        <p>This week, we explored different tokenization schemes.
-        We discovered that we were using a tokenizer that
-        essentially split only on whitespace and punctuation, whereas the GloVe vocabulary
-        was tokenized with rules such as splitting <code>["you're", "don't"]</code> into
-        <code>["you", "'re", "do", "n't"]</code>. This change alone
-        reduces the GloVe LSTM's training OOV rate from 11% to 6.5%.</p>
+        <p>
+            Our corpus is now at 195,000 tweets!
+        </p>
+        <p>
+            We discovered that NLTK provides implementations of several
+            different tokenizing methods, and we tried all of them out.
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tokenizer</th>
+                    <th>Token count</th>
+                    <th>Vocabulary size</th>
+                    <th>OOV&nbsp;rate (wrt.&nbsp;GloVe)</th>
+                    <th>Peak accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>nltk.tokenize.wordpunct</code></td>
+                    <td>3567549</td>
+                    <td>185187</td>
+                    <td>70.70%</td>
+                    <td>60.62%</td>
+                </tr>
+                <tr>
+                    <td><code>nltk.tokenize.word</code></td>
+                    <td>3456080</td>
+                    <td>196209</td>
+                    <td>72.19%</td>
+                    <td>60.91%</td>
+                </tr>
+                <tr>
+                    <td><code>nltk.tokenize.treebank.TreebankWordTokenizer</code></td>
+                    <td>3410336</td>
+                    <td>205096</td>
+                    <td>73.69%</td>
+                    <td>60.96%</td>
+                </tr>
+                <tr>
+                    <td><code>nltk.tokenize.repp.ReppTokenizer</code></td>
+                    <td>3192813</td>
+                    <td>192933</td>
+                    <td>72.65%</td>
+                    <td>60.15%</td>
+                </tr>
+                <tr>
+                    <td><code>nltk.tokenize.moses.MosesTokenizer</code></td>
+                    <td>3463779</td>
+                    <td>195091</td>
+                    <td>69.81%</td>
+                    <td>60.37%</td>
+                </tr>
+                <tr>
+                    <td><code>nltk.tokenize.casual.TweetTokenizer</code></td>
+                    <td>3192813</td>
+                    <td>192933</td>
+                    <td>72.65%</td>
+                    <td>59.75%</td>
+                </tr>
+            </tbody>
+        </table>
 
         <h2>Classifier</h2>
 
@@ -58,16 +111,19 @@
 
         <h3>Odds and Ends</h3>
 
-
         <p>Our end-game plan for the classifier is to run tests to convince ourselves that our advanced
         model actually is learning what we think it's learning. Specifically:</p>
         <ul>
-            <li>Compare it to a model that just takes an average of the input word embeddings, and
-            feeds this into a dense layer. This could give us evidence that the LSTM
+            <li><strong>Compare it to a model that just takes an average of the input word embeddings, and
+            feeds this into a dense layer.</strong> This could give us evidence that the LSTM
             is actually doing something, as opposed to making the embedding layer
             do all the work.</li>
             
-            <li>Compare our models to human performance on the same task.</li>
+            <li><strong>Compare it to human performance on the same task.</strong> The
+            model's accuracy has been rather stagnant, sitting at roughly 60%,
+            despite changing the tokenization method and attention mechanism.
+            This led us to realize that we don't have a good idea of what
+            "optimal" performance on this dataset might look like.</li>
         </ul>
         <p>Furthermore, we'd like to clean up our classifier in a few ways:</p>
         <ul>
